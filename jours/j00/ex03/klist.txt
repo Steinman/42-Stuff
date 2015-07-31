@@ -1,0 +1,9 @@
+Credentials cache: API:13649
+        Principal: hcorrale@42.FR
+
+  Issued                Expires               Principal
+Jul  7 18:54:11 2015  Jul  8 04:54:11 2015  krbtgt/42.FR@42.FR
+Jul  7 18:54:14 2015  Jul  8 04:54:11 2015  nfs/zfs-student-1.42.fr@42.FR
+Jul  7 18:54:14 2015  Jul  8 04:54:11 2015  nfs/zfs-student-2.42.fr@42.FR
+Jul  7 19:19:11 2015  Jul  8 04:54:11 2015  host/vogsphere-frontend-normal-1.42.fr@42.FR
+Jul  7 19:50:44 2015  Jul  8 04:54:11 2015  ldap/ldap-proxy.42.fr@42.FR
