@@ -6,62 +6,61 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 14:53:02 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/01/20 16:46:14 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/02/03 16:11:19 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft/libft.h"
 
-static void		ft_free_list(t_clist **begin)
+static int		ft_read(int const fd, char **stock)
 {
-	t_clist		*lst;
+	static char	buff[BUFF_SIZE + 1] = { '\n' };
+	int			bytes;
+	char		*str;
 
-	lst = *begin;
-	*begin = lst->next;
-	free(lst);
-	lst = NULL;
-}
-
-static int		ft_len(t_clist *lst)
-{
-	t_clist		*browse;
-	int			i;
-
-	i = 0;
-	browse = lst;
-	while (browse || browse->c != c)
+	if (BUFF_SIZE > 147483647 || BUFF_SIZE < 1)
+		return (-1);
+	bytes = read(fd, buff, BUFF_SIZE);
+	if (bytes > 0)
 	{
-		browse = browse->next;
-		i++;
+		buff[bytes] = '\0';
+		str = ft_strjoin(*stock, buff);
+		if (!str)
+			return (-1);
+		free(*stock);
+		*stock = str;
 	}
-	return (i);
+	return (bytes);
 }
 
-static t_clist	*ft_pushlst(t_clist *begin, char c, int fd, int n)
+int				get_next_line(int const fd, char **line)
 {
-	t_clist		list;
-	t_clist		rev;
+	static char	*stock = NULL;
+	char		*index;
+	int			ret;
 
-	list = (t_clist *)malloc(sizeof(t_clist));
-	if (!list)
-		return (NULL);
-	list->fd = fd;
-	list->c = c;
-	if (!begin)
-		list->next = NULL;
-	else
-		list->next = begin;
-	if (n == 0)
+	if (!stock && (stock = (char *)ft_memalloc(sizeof(char))) == NULL)
+		return (-1);
+	index = ft_strchr(stock, '\n');
+	while (index == NULL)
 	{
-		rev = NULL;
-		while (list)
+		ret = ft_read(fd, &stock);
+		if (ret == 0)
 		{
-			rev = ft_free_list(rev, list->c, fd, 1);
-			free(&list);
+			if ((index = ft_strchr(stock, '\0')) == stock)
+				return (0);
 		}
-		return (rev);
+		else if (ret < 0)
+			return (-1);
+		else
+			index = ft_strchr(stock, '\n');
 	}
-	return (list);
+	*line = ft_strsub(stock, 0, index - stock);
+	if (!*line)
+		return (-1);
+	index = ft_strdup(index + 1);
+	free(stock);
+	stock = index;
+	return (1);
 }
-
-static t_clist	*ft_read(int fd);
