@@ -6,28 +6,26 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 14:53:02 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/02/17 14:36:56 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/02/17 16:36:27 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft/libft.h"
 
-static int		ft_read(int const fd, char **stock)
+static int		ft_read(char **stock, int fd)
 {
 	char		buff[BUFF_SIZE + 1];
 	int			bytes;
 	char		*str;
 
-	if (BUFF_SIZE > 147483647 || BUFF_SIZE < 1)
-		return (-1);
-	if (bytes = read(fd, buff, BUFF_SIZE) == -1)
+	if ((bytes = read(fd, buff, BUFF_SIZE)) == -1)
 		return (-1);
 	buff[bytes] = '\0';
 	str = *stock;
 	*stock = ft_strjoin(*stock, buff);
 	if (*str != 0)
-		free (str);
+		free(str);
 	return (bytes);
 }
 
@@ -36,41 +34,47 @@ static int		ft_get_line(char **stock, char **line, char *str)
 	int			n;
 	char		*join;
 
-	i = 0;
+	n = 0;
 	if (*str == '\n')
-		i = 1;
+		n = 1;
 	*str = 0;
 	*line = ft_strjoin("", *stock);
-	
+	if (n == 0 && ft_strlen(*stock) != 0)
+	{
+		*stock = ft_strnew(1);
+		return (1);
+	}
+	else if (n == 0 && !ft_strlen(*stock))
+		return (0);
+	join = *stock;
+	*stock = ft_strjoin(str + 1, "");
+	free(join);
+	return (n);
 }
 
 int				get_next_line(int const fd, char **line)
 {
-	static char	*stock = NULL;
-	char		*index;
+	static char	*stock;
+	char		*str;
 	int			ret;
 
-	if (!stock && (stock = (char *)ft_memalloc(sizeof(char))) == NULL)
+	if (stock == 0)
+		stock = "";
+	if (!line || BUFF_SIZE < 1 || BUFF_SIZE > 147483647)
 		return (-1);
-	index = ft_strchr(stock, '\n');
-	while (index == NULL)
+	ret = BUFF_SIZE;
+	while (line)
 	{
-		ret = ft_read(fd, &stock);
-		if (ret == 0)
+		str = stock;
+		while (*str || ret < BUFF_SIZE)
 		{
-			if ((index = ft_strchr(stock, '\0')) == stock)
-				return (0);
+			if (*str == '\n' || *str == 0 || *str == -1)
+				return (ft_get_line(&stock, line, str));
+			str++;
 		}
-		else if (ret < 0)
+		ret = ft_read(&stock, fd);
+		if (ret == -1)
 			return (-1);
-		else
-			index = ft_strchr(stock, '\n');
 	}
-	*line = ft_strsub(stock, 0, index - stock);
-	if (!*line)
-		return (-1);
-	index = ft_strdup(index + 1);
-	free(stock);
-	stock = index;
-	return (1);
+	return (0);
 }
