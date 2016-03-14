@@ -6,7 +6,7 @@
 #    By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 16:54:52 by hcorrale          #+#    #+#              #
-#    Updated: 2016/03/07 16:38:29 by hcorrale         ###   ########.fr        #
+#    Updated: 2016/03/14 16:11:57 by hcorrale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = ft_isascii.c \
 	  ft_tolower.c \
 	  ft_toupper.c \
 	  ft_atoi.c \
+	  ft_atoi_nb.c \
 	  ft_bzero.c \
 	  ft_memccpy.c \
 	  ft_memcpy.c \
