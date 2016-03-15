@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 15:53:56 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/14 16:59:58 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/03/15 14:35:04 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		*ft_inttab(char *buf)
 {
 	int			*tab;
 	int			j;
-	int i;
+	static int	i;
 
 	tab = (int *)malloc(sizeof(int));
 	j = 0;
@@ -32,7 +32,8 @@ static int		*ft_inttab(char *buf)
 			i++;
 		else
 		{
-			tab[j] = ft_atoi_nb(buf, i);
+			tab[j] = ft_atoi_nb(buf, &i);
+			printf("%d", tab[j]);
 			i++;
 			j++;
 		}
@@ -63,6 +64,5 @@ int				main(int argc, char **argv)
 	buf[i - 1] = '\0';
 	printf("%s\n", buf);
 	tab = ft_inttab(buf);
-	printf("%d", tab[42]);
 	return (0);
 }
