@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 15:53:56 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/23 16:15:10 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/03/23 16:38:34 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,6 @@
 #include <stdio.h>
 #include "mlx.h"
 #include "libft/libft.h"
-
-static int		**ft_inttabtab(char **stock, int nb)
-{
-	int			**tab;
-	int			i;
-
-	i = 0;
-	tab = (int **)malloc(sizeof(int) * nb);
-	while (i < nb)
-	{
-		tab[i] = ft_inttab(stock[i]);
-		ft_putchar('\n');
-		i++;
-	}
-	tab[i] = NULL;
-	return (tab);
-}
 
 static int		*ft_inttab(char *buf)
 {
@@ -51,6 +34,23 @@ static int		*ft_inttab(char *buf)
 		j++;
 		i++;
 	}
+	return (tab);
+}
+
+static int      **ft_inttabtab(char **stock, int nb)
+{
+	int         **tab;
+	int         i;
+
+	i = 0;
+	tab = (int **)malloc(sizeof(int) * nb);
+	while (i < nb)
+	{
+		tab[i] = ft_inttab(stock[i]);
+		ft_putchar('\n');
+		i++;
+	}
+	tab[i] = NULL;
 	return (tab);
 }
 
