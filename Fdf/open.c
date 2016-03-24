@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/07 15:53:56 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/24 13:40:18 by hcorrale         ###   ########.fr       */
+/*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
+/*   Updated: 2016/03/24 16:38:49 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int		*ft_inttab(char *buf)
+static int      *ft_inttab(char *buf)
 {
-	int			*tab;
-	int			i;
-	int			j;
+	int         *tab;
+	int         i;
+	int         j;
 
 	i = 0;
 	j = 0;
@@ -50,29 +50,25 @@ static int      **ft_inttabtab(char **stock, int nb)
 	return (tab);
 }
 
-int				main(int argc, char **argv)
+int				ft_open(char *file)
 {
 	int			fd;
-	int			**tab;
-	char 		*line;
-	char		*buf;
-	char		**stock;
 	int			i;
+	int			**tab;
+	char		*buf;
+	char		*line;
+	char		**stock;
 
-	if (argc != 2)
-		return (0);
-	i = 0;
-	fd = open(argv[1], O_RDONLY);
+	fd = open(file, O_RDONLY);
 	buf = ft_strnew(1);
 	while (get_next_line(fd, &line) > 0)
 	{
 		buf = ft_strjoin(buf, line);
-		buf = ft_strjoin(buf, "\n");
+		buf = ft_strjoin(buf, '\n');
 		i++;
 	}
-	close(fd);
-	printf("%s\n", buf);
+	close (fd);
 	stock = ft_strsplit(buf, '\n');
 	tab = ft_inttabtab(stock, i);
-	return (0);
+	return (tab);
 }
