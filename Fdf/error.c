@@ -1,30 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/24 13:29:53 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/25 14:35:20 by hcorrale         ###   ########.fr       */
+/*   Created: 2016/03/25 13:53:18 by hcorrale          #+#    #+#             */
+/*   Updated: 2016/03/25 14:03:03 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "fdf.h"
 
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include "mlx.h"
-# include "libft/libft.h"
-
-typedef struct		s_var
-{
-	int				l;
-	int				**tab;
-}					t_var;
-
-#endif

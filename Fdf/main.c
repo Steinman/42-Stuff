@@ -6,49 +6,11 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 15:53:56 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/24 13:40:18 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/03/24 16:46:43 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static int		*ft_inttab(char *buf)
-{
-	int			*tab;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	tab = (int *)malloc(sizeof(int));
-	while (buf[i] != '\0')
-	{
-		while (buf[i] == ' ')
-			i++;
-		tab[j] = ft_atoi_nb(buf, &i);
-		printf("%i  ", tab[j]);
-		j++;
-		i++;
-	}
-	printf("%s", "\n");
-	return (tab);
-}
-
-static int      **ft_inttabtab(char **stock, int nb)
-{
-	int         **tab;
-	int         i;
-
-	i = 0;
-	tab = (int **)malloc(sizeof(int) * nb);
-	while (i < nb)
-	{
-		tab[i] = ft_inttab(stock[i]);
-		i++;
-	}
-	tab[i] = NULL;
-	return (tab);
-}
 
 int				main(int argc, char **argv)
 {
