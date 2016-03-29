@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/25 15:29:59 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/03/29 15:21:49 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int				ft_intnb(char *str)
 	j = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] < 48 && str[i] > 57)
+		while (str[i] < 48 && str[i] > 57 && str[i] != '\0')
 			i++;
-		else
+		if (str[i] >= 48 && str[i] <= 57)
 		{
+			j++;
 			while (str[i + 1] >= 48 && str[i + 1] <= 57)
 				i++;
-			j++;
 		}
 		i++;
 	}
@@ -42,7 +42,7 @@ static int      *ft_inttab(char *buf)
 
 	i = 0;
 	j = 0;
-	tab = (int *)malloc(sizeof(int) * 1000);
+	tab = (int *)malloc(sizeof(int) * ft_intnb(buf));
 	while (buf[i] != '\0')
 	{
 		while (buf[i] == ' ')

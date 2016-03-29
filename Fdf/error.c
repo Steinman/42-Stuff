@@ -6,9 +6,22 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 13:53:18 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/25 14:03:03 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/03/29 18:04:35 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static int	ft_charerror(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_isdigitchar(str[i]) == 0 && str[i] != ' ')
+				return(-1);
+		i++;
+	}
+	return (0);
+}
