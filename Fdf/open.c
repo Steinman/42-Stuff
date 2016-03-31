@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/31 16:37:47 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/03/31 16:43:32 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int				main(int ac, char **av)
 		return (-1);
 	else
 	{
-		if ((v = ft_open(av[1], v, 0)).err == 1)
+		if ((v = ft_open(av[1], v, 0)).err == -1)
 		{
 			ft_putstr("walla sa march pa");
 		}
