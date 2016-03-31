@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 13:53:18 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/29 18:04:35 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/03/31 13:45:32 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static int	ft_charerror(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_isdigitchar(str[i]) == 0 && str[i] != ' ')
+		if (ft_isdigitchar(str[i]) == 0 && str[i] != ' ' && str[i] !+ '-')
 				return(-1);
 		i++;
 	}
 	return (0);
 }
+
+
