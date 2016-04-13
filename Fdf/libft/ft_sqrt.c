@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/24 13:29:53 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/13 16:06:50 by hcorrale         ###   ########.fr       */
+/*   Created: 2016/04/13 14:58:17 by hcorrale          #+#    #+#             */
+/*   Updated: 2016/04/13 15:01:59 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "libft.h"
 
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include "mlx.h"
-# include "libft/libft.h"
-
-typedef struct		s_var
+int			ft_sqrt(int nb)
 {
-	int				l;
-	int				**tab;
-	int				err;
-	int				len;
-}					t_var;
+	int		i;
 
-typedef struct		s_point
-{
-	double			x;
-	double			y;
-}					t_point;
-
-#endif
+	i = 1;
+	if (nb == 0)
+		return (0);
+	while (i * i < nb)
+		i++;
+	if ((nb % i) == 0)
+		return (i);
+	else
+		return(0);
+}

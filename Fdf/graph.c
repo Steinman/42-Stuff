@@ -6,41 +6,32 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/11 17:36:32 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/13 17:01:10 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
+#include <math.h>
 
-void		ft_draw_line(int 1x, int 1y, int 2x, int 2y void *mlx, void *win)
+void		ft_draw_line(t_point a, t_point b, void *mlx, void *win)
 {
-	int		x1;
-	int		y1;
-	int		x2;
-	int		y2;
-	int		dx;
-	int		dy;
+	double	x0;
+	double	y0;
+	float	dx;
+	float	dy;
+	double	tx;
 
-	if (1x > 2x)
+	tx = 0.0;
+	dx = b.x - a.x;
+	dy = b.y - a.y;
+	while (tx <= 1)
 	{
-		x1 = 2x;
-		x2 = 1x;
-		y1 = 2y;
-		y2 = 1y;
+		x0 = a.x + (dx * tx);
+		y0 = a.y + (dy * tx);
+		mlx_pixel_put(mlx, win, x0, y0, 0x00FFFFFF);
+		tx += 1. / sqrtf((dx * dx) + (dy * dy));
 	}
-	else
-	{
-		x1 = 1x;
-		x2 = 2x;
-		y1 = 1y;
-		y2 = 2y;
-	}
-	dx = x2 - x1;
-	dy = y2 - y1;
-	if ((!dx) && (!dy))
-		return;
-	if (dy < 0)
-		dy = -dy;
 }
 
 int			main(void)
@@ -50,10 +41,10 @@ int			main(void)
 	t_point	a;
 	t_point	b;
 
-	a.x = 500;
-	a.y = 100;
-	b.x = 700;
-	b.y = 400;
+	a.x = 700;
+	a.y = 500;
+	b.x = 300;
+	b.y = 100;
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 800, 800, "mlx_win");
 	ft_draw_line(a, b, mlx, win);

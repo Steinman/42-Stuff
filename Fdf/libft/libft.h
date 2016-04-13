@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 14:58:38 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/23 15:50:52 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/13 16:53:18 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_swap(int *a, int *b);
 int					ft_isdigitchar(char c);
 int					ft_power(int nb, int p);
+int					ft_sqrt(int nb);
 int					get_next_line(int const fd, char **line);
 
 #endif
