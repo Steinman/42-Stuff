@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/13 17:01:10 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/13 17:58:15 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,25 @@ void		ft_draw_line(t_point a, t_point b, void *mlx, void *win)
 	}
 }
 
+void		ft_drawtab(t_var v)
+{
+	int		i;
+
+	i = 0;
+	while (i < v.len)
+	{
+		
+	}
+}
+
 int			main(void)
 {
-	void	*mlx;
-	void	*win;
-	t_point	a;
-	t_point	b;
+	t_var	v;
+	v.winx = 800;
+	v.winy = 800;
 
-	a.x = 700;
-	a.y = 500;
-	b.x = 300;
-	b.y = 100;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 800, "mlx_win");
-	ft_draw_line(a, b, mlx, win);
-	mlx_pixel_put(mlx, win, a.x, a.y, 0x00FF0000);
-	mlx_pixel_put(mlx, win, b.x, b.y, 0x00FF0000);
+	v->mlx = mlx_init();
+	v->win = mlx_new_window(v->mlx, v.winx, v.winy, "mlx_win");
 	mlx_loop(mlx);
 	return (0);
 }
