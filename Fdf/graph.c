@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/19 14:02:27 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/19 17:20:33 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ static void	ft_drawtab(t_var v, int j)
 	i = 0;
 	while ((v.len * mul) > (v.winx - 200))
 			mul--;
-	v.a.x = 100;
-	v.a.y = v.winy / 2;
+	v.a.x = 100 + j * (mul / 2);
+	v.a.y = v.winy / 2 + j * (mul / 2);
 	v.b.x = v.a.x + mul / 2;
 	v.b.y = v.a.y - mul / 2;
 	while (i < v.len)
 	{
-		v.a.y += v.tab[j][i];
+		v.a.y -= v.tab[j][i];
+		v.b.y -= v.tab[j][i + 1];
 		ft_draw_line(v.a, v.b, v);
 		v.a.x += mul / 2;
 		v.a.y -= mul / 2;
@@ -62,7 +63,9 @@ static void	ft_drawtab(t_var v, int j)
 int			main(int ac, char **av)
 {
 	t_var	v;
+	int		i;
 
+	i = 0;
 	v.err = 0;
 	if (ac!= 2)
 		return (-1);
@@ -75,7 +78,11 @@ int			main(int ac, char **av)
 	v.winy = 800;
 	v.mlx = mlx_init();
 	v.win = mlx_new_window(v.mlx, v.winx, v.winy, "mlx_win");
-	ft_drawtab(v, 0);
+	while (i < v.l)
+	{
+		ft_drawtab(v, i);
+		i++;
+	}
 	mlx_loop(v.mlx);
 	return (0);
 }
