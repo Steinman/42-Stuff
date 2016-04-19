@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/14 17:16:34 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/19 14:02:27 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void		ft_draw_line(t_point a, t_point b, void *mlx, void *win)
+static void	ft_draw_line(t_point a, t_point b, t_var v)
 {
 	double	x0;
 	double	y0;
@@ -29,12 +29,12 @@ void		ft_draw_line(t_point a, t_point b, void *mlx, void *win)
 	{
 		x0 = a.x + (dx * tx);
 		y0 = a.y + (dy * tx);
-		mlx_pixel_put(mlx, win, x0, y0, 0x00FFFFFF);
+		mlx_pixel_put(v.mlx, v.win, x0, y0, 0x00FFFFFF);
 		tx += 1. / sqrtf((dx * dx) + (dy * dy));
 	}
 }
 
-void		ft_drawtab(t_var v)
+static void	ft_drawtab(t_var v, int j)
 {
 	int		i;
 	int		mul;
@@ -49,29 +49,33 @@ void		ft_drawtab(t_var v)
 	v.b.y = v.a.y - mul / 2;
 	while (i < v.len)
 	{
-		ft_draw_line(v.a, v.b, v.mlx, v.win);
-		v.b.y += mul;
-		ft_draw_line(v.a, v.b, v.mlx, v.win);
+		v.a.y += v.tab[j][i];
+		ft_draw_line(v.a, v.b, v);
 		v.a.x += mul / 2;
 		v.a.y -= mul / 2;
 		v.b.x += mul / 2;
-		v.b.y -= (mul + mul / 2);
+		v.b.y -= mul / 2;
 		i++;
 	}
-	v.b.y += mul;
-	ft_draw_line(v.a, v.b, v.mlx, v.win);
 }
 
-int			main(void)
+int			main(int ac, char **av)
 {
 	t_var	v;
 
-	v.len = 19;
+	v.err = 0;
+	if (ac!= 2)
+		return (-1);
+	else
+	{
+		if ((v = ft_open(av[1], v, 0)).err == -1)
+			ft_putstr("wallah sa march pa");
+	}
 	v.winx = 800;
 	v.winy = 800;
 	v.mlx = mlx_init();
 	v.win = mlx_new_window(v.mlx, v.winx, v.winy, "mlx_win");
-	ft_drawtab(v);
+	ft_drawtab(v, 0);
 	mlx_loop(v.mlx);
 	return (0);
 }

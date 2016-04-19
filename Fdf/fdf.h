@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:29:53 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/13 17:58:23 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/19 13:59:32 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ typedef struct		s_var
 	void			*mlx;
 	void			*win;
 }					t_var;
+
+t_var		ft_open(char *file, t_var v, int fd);
 
 #endif
