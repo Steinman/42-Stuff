@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/19 17:20:33 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/20 14:22:06 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,17 @@ static void	ft_drawtab(t_var v, int j)
 	v.b.y = v.a.y - mul / 2;
 	while (i < v.len)
 	{
+		v.c.x = v.b.x;
+		if (j < v.l - 1)
+			v.c.y = v.a.y + (mul / 2) - v.tab[j + 1][i];
 		v.a.y -= v.tab[j][i];
 		v.b.y -= v.tab[j][i + 1];
-		ft_draw_line(v.a, v.b, v);
+		if (i < v.len - 1)
+			ft_draw_line(v.a, v.b, v);
+		if (j < v.l - 1)
+			ft_draw_line(v.a, v.c, v);
+		v.a.y += v.tab[j][i];
+		v.b.y += v.tab[j][i + 1];
 		v.a.x += mul / 2;
 		v.a.y -= mul / 2;
 		v.b.x += mul / 2;
