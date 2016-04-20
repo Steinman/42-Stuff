@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/20 14:22:06 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/20 16:46:44 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	ft_drawtab(t_var v, int j)
 	mul = 300;
 	i = 0;
 	while ((v.len * mul) > (v.winx - 200))
-			mul--;
-	v.a.x = 100 + j * (mul / 2);
+		mul--;
+	v.a.x = ((v.winx / 2) - (((v.len + v.l) / 2) * mul / 2)) + j * (mul / 2);
 	v.a.y = v.winy / 2 + j * (mul / 2);
 	v.b.x = v.a.x + mul / 2;
 	v.b.y = v.a.y - mul / 2;
@@ -75,7 +75,7 @@ int			main(int ac, char **av)
 
 	i = 0;
 	v.err = 0;
-	if (ac!= 2)
+	if (ac != 2)
 		return (-1);
 	else
 	{
