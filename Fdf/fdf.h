@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:29:53 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/02 14:36:07 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/02 16:26:06 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct		s_var
 	int				len;
 	int				winx;
 	int				winy;
-	int				mul;
+	double			mul;
 	t_point			a;
 	t_point			b;
 	t_point			c;

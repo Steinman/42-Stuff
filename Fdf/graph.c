@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/02 15:19:30 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/02 16:41:49 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ static void	ft_drawtab(t_var v, int j)
 	}
 }
 
-int			ft_zoom(int keycode, void *param)
+int			ft_zoom(int keycode, t_var v)
 {
-	t_var	v;
 	int		i;
 
 	i = 0;
@@ -120,7 +119,7 @@ int			main(int ac, char **av)
 		ft_drawtab(v, i);
 		i++;
 	}
-	mlx_key_hook(v.win, ft_zoom, 0);
+	mlx_key_hook(v.win, ft_zoom, &v);
 	mlx_loop(v.mlx);
 	return (0);
 }
