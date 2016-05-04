@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/04/19 16:30:53 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/04 15:48:31 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,30 @@ static int		**ft_inttabtab(char **stock, int nb)
 	return (tab);
 }
 
-t_var			ft_open(char *file, t_var v, int fd)
+t_var			*ft_open(char *file, t_var *v, int fd)
 {
 	char		*buf;
 	char		*line;
 	char		**stock;
 
-	v.l = 0;
+	v->l = 0;
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{
-		v.err = -1;
+		v->err = -1;
 		return (v);
 	}
 	buf = ft_strnew(1);
-	while ((v.err = get_next_line(fd, &line)) > 0)
+	while ((v->err = get_next_line(fd, &line)) > 0)
 	{
 		buf = ft_strjoin(buf, line);
 		buf = ft_strjoin(buf, "\n");
-		v.l++;
+		v->l++;
 	}
-	if (v.err == -1)
+	if (v->err == -1)
 		return (v);
 	close(fd);
 	stock = ft_strsplit(buf, '\n');
-	v.len = ft_intnb(stock[0]);
-	v.tab = ft_inttabtab(stock, v.l);
+	v->len = ft_intnb(stock[0]);
+	v->tab = ft_inttabtab(stock, v->l);
 	return (v);
 }

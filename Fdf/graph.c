@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/02 17:01:17 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/04 17:01:52 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_drawtab(t_var *v, int j)
 
 	i = 0;
 	v->a.x = ((v->winx - (v->len * (v->mul / 2))) / 2) - ((v->l * (v->mul / 2)) / 2) + j * (v->mul / 2);
-	v->a.y = v->winy / 2 + j * (v->mul / 2);
+	v->a.y = v->winy - (v->l * (v->mul / 2)) + j * (v->mul / 2);
 	v->b.x = v->a.x + v->mul / 2;
 	v->b.y = v->a.y - v->mul / 2;
 	while (i < v->len)
@@ -64,32 +64,13 @@ static void	ft_drawtab(t_var *v, int j)
 	}
 }
 
-int			ft_zoom(int keycode, t_var *v)
+int			ft_escape(int keycode, t_var *v)
 {
-	int		i;
-
-	i = 0;
-	printf("key event %d\n", keycode);
-	if (keycode == 126)
-	{
-		v->mul = v->mul * 2;
-		while (i < v->l)
+	if (keycode == 53)
 		{
-			ft_drawtab(v, i);
-			i++;
+			mlx_destroy_window(v->mlx, v->win);
+			exit(0);
 		}
-		i = 0;
-	}
-	if (keycode == 125)
-	{
-		v->mul = v->mul / 2;
-		while (i < v->l)
-		{
-			ft_drawtab(v, i);
-			i++;
-		}
-		i = 0;
-	}
 	return (0);
 }
 
@@ -99,27 +80,39 @@ int			main(int ac, char **av)
 	int		i;
 
 	i = 0;
+	v = (t_var *)malloc(sizeof(t_var));
 	v->err = 0;
 	if (ac != 2)
 		return (-1);
 	else
 	{
-		if ((v = ft_open(av[1], *v, 0))->err == -1)
+		if ((v = ft_open(av[1], v, 0))->err == -1)
 			ft_putstr("wallah sa march pa");
 	}
+	printf("%d points par lignes\n", v->len);
+	printf("%d points par colones\n", v->l);
 	v->winx = 800;
 	v->winy = 800;
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->winx, v->winy, "mlx_win");
-	v->mul = 300;
-	while ((v->len * v->mul) > (v->winx - 200))
-		v->mul--;
+	v->mul = v->winx;
+	if (v->len > v->l)
+	{
+		while ((v->len * v->mul) > v->winy)
+			v->mul--;
+	}
+	else
+	{
+		while ((v->l * v->mul) > v->winx)
+			v->mul--;
+	}
+	printf("mul = %f\n", v->mul);
 	while (i < v->l)
 	{
 		ft_drawtab(v, i);
 		i++;
 	}
-	mlx_key_hook(v->win, ft_zoom, &v);
+	mlx_key_hook(v->win, ft_escape, v);
 	mlx_loop(v->mlx);
 	return (0);
 }
