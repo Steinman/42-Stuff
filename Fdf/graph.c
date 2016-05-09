@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/04 17:01:52 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:45:54 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ static void	ft_drawtab(t_var *v, int j)
 
 	i = 0;
 	v->a.x = ((v->winx - (v->len * (v->mul / 2))) / 2) - ((v->l * (v->mul / 2)) / 2) + j * (v->mul / 2);
-	v->a.y = v->winy - (v->l * (v->mul / 2)) + j * (v->mul / 2);
+	if (v->len >= v->l)
+		v->a.y = v->winy - ((v->len + v->l) / 2  * (v->mul / 2)) + j * (v->mul / 2);
+	else
+		v->a.y = v->winy - (v->l * (v->mul / 2)) + j * (v->mul / 2);
 	v->b.x = v->a.x + v->mul / 2;
 	v->b.y = v->a.y - v->mul / 2;
 	while (i < v->len)
@@ -69,6 +72,7 @@ int			ft_escape(int keycode, t_var *v)
 	if (keycode == 53)
 		{
 			mlx_destroy_window(v->mlx, v->win);
+			free(v);
 			exit(0);
 		}
 	return (0);
@@ -87,7 +91,7 @@ int			main(int ac, char **av)
 	else
 	{
 		if ((v = ft_open(av[1], v, 0))->err == -1)
-			ft_putstr("wallah sa march pa");
+			ft_putstr("ERROR");
 	}
 	printf("%d points par lignes\n", v->len);
 	printf("%d points par colones\n", v->l);
@@ -112,6 +116,7 @@ int			main(int ac, char **av)
 		ft_drawtab(v, i);
 		i++;
 	}
+	free(v->tab);
 	mlx_key_hook(v->win, ft_escape, v);
 	mlx_loop(v->mlx);
 	return (0);

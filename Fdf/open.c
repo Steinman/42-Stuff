@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/04 15:48:31 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:51:32 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 		return (v);
 	close(fd);
 	stock = ft_strsplit(buf, '\n');
+	free(buf);
 	v->len = ft_intnb(stock[0]);
 	v->tab = ft_inttabtab(stock, v->l);
+	free(stock);
 	return (v);
 }
