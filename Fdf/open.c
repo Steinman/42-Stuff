@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/09 14:51:32 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/09 16:12:53 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int		**ft_inttabtab(char **stock, int nb)
 	int			i;
 
 	i = 0;
-	tab = (int **)malloc(sizeof(int) * 1000);
+	tab = (int **)malloc(sizeof(int *) * nb);
 	while (i < nb)
 	{
 		tab[i] = ft_inttab(stock[i]);
