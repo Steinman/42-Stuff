@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/09 16:12:53 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/09 16:39:38 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{
 		v->err = -1;
+		ft_putstr("ERROR: invalid file !\n");
 		return (v);
 	}
 	buf = ft_strnew(1);
@@ -89,7 +90,10 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 		v->l++;
 	}
 	if (v->err == -1)
+	{
+		ft_putstr("ERROR: file error\n");
 		return (v);
+	}
 	close(fd);
 	stock = ft_strsplit(buf, '\n');
 	free(buf);

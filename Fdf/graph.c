@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/09 14:45:54 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/09 16:38:34 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ int			main(int ac, char **av)
 	else
 	{
 		if ((v = ft_open(av[1], v, 0))->err == -1)
-			ft_putstr("ERROR");
+		{
+			free(v);
+			exit(0);
+		}
 	}
 	printf("%d points par lignes\n", v->len);
 	printf("%d points par colones\n", v->l);
