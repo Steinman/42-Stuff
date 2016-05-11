@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/09 16:38:34 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/11 16:24:22 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ int			main(int ac, char **av)
 			exit(0);
 		}
 	}
-	printf("%d points par lignes\n", v->len);
-	printf("%d points par colones\n", v->l);
 	v->winx = 800;
 	v->winy = 800;
 	v->mlx = mlx_init();
@@ -113,7 +111,6 @@ int			main(int ac, char **av)
 		while ((v->l * v->mul) > v->winx)
 			v->mul--;
 	}
-	printf("mul = %f\n", v->mul);
 	while (i < v->l)
 	{
 		ft_drawtab(v, i);

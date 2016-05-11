@@ -6,13 +6,13 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/09 16:39:38 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/11 16:33:15 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int		ft_intnb(char *str)
+int				ft_intnb(char *str)
 {
 	int			i;
 	int			j;
@@ -26,7 +26,7 @@ static int		ft_intnb(char *str)
 		if (str[i] >= 48 && str[i] <= 57)
 		{
 			j++;
-			while (str[i + 1] >= 48 && str[i + 1] <= 57)
+			while (str[i + 1] != ' ' && str[i + 1] != '\0')
 				i++;
 		}
 		i++;
@@ -82,6 +82,7 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 		ft_putstr("ERROR: invalid file !\n");
 		return (v);
 	}
+	ft_putstr("opened file\n");
 	buf = ft_strnew(1);
 	while ((v->err = get_next_line(fd, &line)) > 0)
 	{
@@ -97,6 +98,11 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 	close(fd);
 	stock = ft_strsplit(buf, '\n');
 	free(buf);
+	if ((v->err = ft_lineerror(stock, v)) == -1)
+	{
+		ft_putstr("ERROR: file error\n");
+		return (v);
+	}
 	v->len = ft_intnb(stock[0]);
 	v->tab = ft_inttabtab(stock, v->l);
 	free(stock);
