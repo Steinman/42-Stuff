@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/11 16:33:15 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/12 17:37:05 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int		*ft_inttab(char *buf)
 	tab = (int *)malloc(sizeof(int) * ft_intnb(buf));
 	while (buf[i] != '\0')
 	{
-		while (buf[i] == ' ')
+		while (ft_isdigitchar(buf[i]) == 0 && buf[i] != '\0')
 			i++;
 		tab[j] = ft_atoi_nb(buf, &i);
 		j++;
@@ -82,7 +82,6 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 		ft_putstr("ERROR: invalid file !\n");
 		return (v);
 	}
-	ft_putstr("opened file\n");
 	buf = ft_strnew(1);
 	while ((v->err = get_next_line(fd, &line)) > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/11 16:24:22 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/12 17:37:56 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int			main(int ac, char **av)
 	int		i;
 
 	i = 0;
-	v = (t_var *)malloc(sizeof(t_var));
+	v = (t_var *)malloc(sizeof(t_var) * 1);
 	v->err = 0;
 	if (ac != 2)
 		return (-1);
