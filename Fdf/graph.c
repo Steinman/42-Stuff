@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/12 17:37:56 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:49:52 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ static void	ft_drawtab(t_var *v, int j)
 	i = 0;
 	v->a.x = ((v->winx - (v->len * (v->mul / 2))) / 2) - ((v->l * (v->mul / 2)) / 2) + j * (v->mul / 2);
 	if (v->len >= v->l)
-		v->a.y = v->winy - ((v->len + v->l) / 2  * (v->mul / 2)) + j * (v->mul / 2);
+		v->a.y = v->winy - ((v->len + v->l) / 2  * (v->mul / 2)) + j * (v->mul / 3);
 	else
-		v->a.y = v->winy - (v->l * (v->mul / 2)) + j * (v->mul / 2);
+		v->a.y = v->winy - (v->l * (v->mul / 2)) + j * (v->mul / 3);
 	v->b.x = v->a.x + v->mul / 2;
-	v->b.y = v->a.y - v->mul / 2;
+	v->b.y = v->a.y - v->mul / 3;
 	while (i < v->len)
 	{
 		v->c.x = v->b.x;
 		if (j < v->l - 1)
-			v->c.y = v->a.y + (v->mul / 2) - v->tab[j + 1][i];
+			v->c.y = v->a.y + (v->mul / 3) - v->tab[j + 1][i];
 		v->a.y -= v->tab[j][i];
 		v->b.y -= v->tab[j][i + 1];
 		if (i < v->len - 1)
@@ -60,9 +60,9 @@ static void	ft_drawtab(t_var *v, int j)
 		v->a.y += v->tab[j][i];
 		v->b.y += v->tab[j][i + 1];
 		v->a.x += v->mul / 2;
-		v->a.y -= v->mul / 2;
+		v->a.y -= v->mul / 3;
 		v->b.x += v->mul / 2;
-		v->b.y -= v->mul / 2;
+		v->b.y -= v->mul / 3;
 		i++;
 	}
 }
