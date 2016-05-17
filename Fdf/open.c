@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/12 17:37:05 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:54:59 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ int				ft_intnb(char *str)
 	return (j);
 }
 
+static int		ft_verif(char c)
+{
+	if (ft_isdigitchar(c) == 0 && c != ' ' && c != '-' && c != '+' && c)
+		return (0);
+	else
+		return (1);
+}
+
 static int		*ft_inttab(char *buf)
 {
 	int			*tab;
@@ -45,11 +53,15 @@ static int		*ft_inttab(char *buf)
 	tab = (int *)malloc(sizeof(int) * ft_intnb(buf));
 	while (buf[i] != '\0')
 	{
-		while (ft_isdigitchar(buf[i]) == 0 && buf[i] != '\0')
+		if (!ft_isdigitchar(buf[i]) && buf[i] != '-')
 			i++;
-		tab[j] = ft_atoi_nb(buf, &i);
-		j++;
-		i++;
+		else
+		{
+			tab[j] = ft_atoi_nb(buf, &i);
+			j++;
+			while (buf[i] != ' ' && buf[i])
+				i++;
+		}
 	}
 	return (tab);
 }
