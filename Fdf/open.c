@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/17 17:30:02 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/17 18:02:08 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 	char		*buf;
 	char		*line;
 	char		**stock;
+	int			i;
 
+	i = 0;
 	v->l = 0;
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{
@@ -107,12 +109,23 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 	stock = ft_strsplit(buf, '\n');
 	printf("string tab created\n");
 	free(buf);
+	if ((v->err = ft_emptyline(stock, v)) == -1)
+	{
+		ft_putstr("ERROR: file error\n");
+		return (v);
+	}
 	if ((v->err = ft_lineerror(stock, v)) == -1)
 	{
 		ft_putstr("ERROR: file error\n");
 		return (v);
 	}
 	v->len = ft_intnb(stock[0]);
+	printf("v->len = %d\n", v->len);
+	while (i < v->l)
+	{
+		printf("%d\n", ft_intnb(stock[i]));
+		i++;
+	}
 	v->tab = ft_inttabtab(stock, v->l);
 	free(stock);
 	return (v);

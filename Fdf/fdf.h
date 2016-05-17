@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:29:53 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/11 13:22:36 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/17 18:00:01 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_var
 
 t_var		*ft_open(char *file, t_var *v, int fd);
 int			ft_lineerror(char **str, t_var *v);
+int			ft_emptyline(char **str, t_var *v);
 int			ft_intnb(char *str);
 
 #endif
