@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 13:53:18 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/20 14:58:36 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/20 15:48:48 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ int			ft_emptyline(char *str)
 	int		i;
 
 	i = 0;
+	if (str[0] == '\n')
+		return (-1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\n')
 		{
-			if (str[i + 1] == '\n' || str[i + 1] == '\0')
+			if (str[i + 1] == '\n' || str[i - 1] == '\0')
 				return (-1);
 		}
 		i++;
