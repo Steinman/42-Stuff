@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:29:53 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/20 14:55:52 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/20 16:53:09 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ t_var		*ft_open(char *file, t_var *v, int fd);
 int			ft_lineerror(char **str, t_var *v);
 int			ft_emptyline(char *str);
 int			ft_intnb(char *str);
+t_var		*ft_graph_init(t_var *v);
 
 #endif

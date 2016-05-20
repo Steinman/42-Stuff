@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/17 12:49:52 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/20 17:00:31 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ static void	ft_drawtab(t_var *v, int j)
 	int		i;
 
 	i = 0;
-	v->a.x = ((v->winx - (v->len * (v->mul / 2))) / 2) - ((v->l * (v->mul / 2)) / 2) + j * (v->mul / 2);
+	v->a.x = ((v->winx - (v->len * (v->mul / 2))) / 2) -
+		((v->l * (v->mul / 2)) / 2) + j * (v->mul / 2);
 	if (v->len >= v->l)
-		v->a.y = v->winy - ((v->len + v->l) / 2  * (v->mul / 2)) + j * (v->mul / 3);
+		v->a.y = v->winy - ((v->len + v->l) / 2 * (v->mul / 2))
+			+ j * (v->mul / 3);
 	else
 		v->a.y = v->winy - (v->l * (v->mul / 2)) + j * (v->mul / 3);
 	v->b.x = v->a.x + v->mul / 2;
@@ -70,11 +72,11 @@ static void	ft_drawtab(t_var *v, int j)
 int			ft_escape(int keycode, t_var *v)
 {
 	if (keycode == 53)
-		{
-			mlx_destroy_window(v->mlx, v->win);
-			free(v);
-			exit(0);
-		}
+	{
+		mlx_destroy_window(v->mlx, v->win);
+		free(v);
+		exit(0);
+	}
 	return (0);
 }
 
@@ -96,26 +98,9 @@ int			main(int ac, char **av)
 			exit(0);
 		}
 	}
-	v->winx = 800;
-	v->winy = 800;
-	v->mlx = mlx_init();
-	v->win = mlx_new_window(v->mlx, v->winx, v->winy, "mlx_win");
-	v->mul = v->winx;
-	if (v->len > v->l)
-	{
-		while ((v->len * v->mul) > v->winy)
-			v->mul--;
-	}
-	else
-	{
-		while ((v->l * v->mul) > v->winx)
-			v->mul--;
-	}
+	v = ft_graph_init(v);
 	while (i < v->l)
-	{
-		ft_drawtab(v, i);
-		i++;
-	}
+		ft_drawtab(v, i++);
 	free(v->tab);
 	mlx_key_hook(v->win, ft_escape, v);
 	mlx_loop(v->mlx);
