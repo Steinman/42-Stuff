@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/17 18:02:08 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/20 14:53:10 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,20 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 		ft_putstr("ERROR: file error\n");
 		return (v);
 	}
+	if ((v->err = ft_emptyline(buf)) == -1)
+	{
+		ft_putstr("ERROR: empty line\n");
+		return (v);
+	}
 	close(fd);
 	stock = ft_strsplit(buf, '\n');
 	printf("string tab created\n");
-	free(buf);
-	if ((v->err = ft_emptyline(stock, v)) == -1)
+	while (i < v->l)
 	{
-		ft_putstr("ERROR: file error\n");
-		return (v);
+		printf("%s\n", stock[i]);
+		i++;
 	}
+	free(buf);
 	if ((v->err = ft_lineerror(stock, v)) == -1)
 	{
 		ft_putstr("ERROR: file error\n");
@@ -121,11 +126,6 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 	}
 	v->len = ft_intnb(stock[0]);
 	printf("v->len = %d\n", v->len);
-	while (i < v->l)
-	{
-		printf("%d\n", ft_intnb(stock[i]));
-		i++;
-	}
 	v->tab = ft_inttabtab(stock, v->l);
 	free(stock);
 	return (v);

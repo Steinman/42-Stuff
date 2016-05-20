@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 13:53:18 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/17 17:58:18 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/20 14:58:36 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@ int			ft_lineerror(char **str, t_var *v)
 	return (0);
 }
 
-int			ft_emptyline(char **str, t_var *v)
+int			ft_emptyline(char *str)
 {
 	int		i;
 
 	i = 0;
-	while (i < v->l)
+	while (str[i] != '\0')
 	{
-		if (str[i][0] == '\0')
-			return (-1);
+		if (str[i] == '\n')
+		{
+			if (str[i + 1] == '\n' || str[i + 1] == '\0')
+				return (-1);
+		}
 		i++;
 	}
 	return (0);
