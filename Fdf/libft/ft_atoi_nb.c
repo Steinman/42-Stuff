@@ -6,11 +6,11 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 16:00:16 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/03/23 15:50:25 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:07:01 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_atoi_nb(const char *str, int *i)
+int	ft_atoi_nb(const char *str, int *i)
 {
 	int sign;
 	int nb;

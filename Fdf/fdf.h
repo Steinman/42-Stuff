@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:29:53 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 13:59:27 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:06:08 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ typedef struct		s_var
 	char			*buf;
 }					t_var;
 
-t_var		*ft_open(char *file, t_var *v, int fd);
-int			ft_lineerror(char **str, t_var *v);
-int			ft_emptyline(char *str);
-int			ft_intnb(char *str);
-t_var		*ft_graph_init(t_var *v);
-t_var		*ft_points_init(t_var *v, int j);
-t_var		*ft_fd_error(t_var *v, int fd, char *file);
+t_var				*ft_open(char *file, t_var *v, int fd);
+int					ft_lineerror(char **str, t_var *v);
+int					ft_emptyline(char *str);
+int					ft_intnb(char *str);
+t_var				*ft_graph_init(t_var *v);
+t_var				*ft_points_init(t_var *v, int j);
+t_var				*ft_fd_error(t_var *v, int fd, char *file);
 
 #endif
