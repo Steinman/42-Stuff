@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/20 17:00:31 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/26 13:19:14 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,7 @@ static void	ft_drawtab(t_var *v, int j)
 	int		i;
 
 	i = 0;
-	v->a.x = ((v->winx - (v->len * (v->mul / 2))) / 2) -
-		((v->l * (v->mul / 2)) / 2) + j * (v->mul / 2);
-	if (v->len >= v->l)
-		v->a.y = v->winy - ((v->len + v->l) / 2 * (v->mul / 2))
-			+ j * (v->mul / 3);
-	else
-		v->a.y = v->winy - (v->l * (v->mul / 2)) + j * (v->mul / 3);
-	v->b.x = v->a.x + v->mul / 2;
-	v->b.y = v->a.y - v->mul / 3;
+	v = ft_points_init(v, j);
 	while (i < v->len)
 	{
 		v->c.x = v->b.x;

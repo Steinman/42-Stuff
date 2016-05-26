@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/20 16:03:10 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:01:12 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,37 +75,17 @@ static int		**ft_inttabtab(char **stock, int nb)
 
 t_var			*ft_open(char *file, t_var *v, int fd)
 {
-	char		*buf;
-	char		*line;
 	char		**stock;
 
-	v->l = 0;
-	if ((fd = open(file, O_RDONLY)) == -1)
-	{
-		v->err = -1;
-		ft_putstr("ERROR: invalid file !\n");
-		return (v);
-	}
-	buf = ft_strnew(1);
-	while ((v->err = get_next_line(fd, &line)) > 0)
-	{
-		buf = ft_strjoin(buf, line);
-		buf = ft_strjoin(buf, "\n");
-		v->l++;
-	}
-	if (v->err == -1)
-	{
-		ft_putstr("ERROR: file error\n");
-		return (v);
-	}
-	if ((v->err = ft_emptyline(buf)) == -1)
+	v = ft_fd_error(v, fd, file);
+	if ((v->err = ft_emptyline(v->buf)) == -1)
 	{
 		ft_putstr("ERROR: empty line\n");
 		return (v);
 	}
 	close(fd);
-	stock = ft_strsplit(buf, '\n');
-	free(buf);
+	stock = ft_strsplit(v->buf, '\n');
+	free(v->buf);
 	if ((v->err = ft_lineerror(stock, v)) == -1)
 	{
 		ft_putstr("ERROR: file error\n");

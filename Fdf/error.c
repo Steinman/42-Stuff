@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 13:53:18 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/20 15:48:48 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/26 13:59:45 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,30 @@ int			ft_emptyline(char *str)
 		i++;
 	}
 	return (0);
+}
+
+t_var		*ft_fd_error(t_var *v, int fd, char *file)
+{
+	char	*line;
+
+	v->l = 0;
+	if ((fd = open(file, O_RDONLY)) == -1)
+	{
+		v->err = -1;
+		ft_putstr("ERROR:invalid file !\n");
+		return (v);
+	}
+	v->buf = ft_strnew(1);
+	while ((v->err = get_next_line(fd, &line)) > 0)
+	{
+		v->buf = ft_strjoin(v->buf, line);
+		v->buf = ft_strjoin(v->buf, "\n");
+		v->l++;
+	}
+	if (v->err == -1)
+	{
+		ft_putstr("ERROR: file error\n");
+		return (v);
+	}
+	return (v);
 }
