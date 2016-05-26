@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:29:53 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 14:06:08 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/26 16:29:28 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
 # include "mlx.h"
 # include "libft/libft.h"
 

@@ -6,13 +6,11 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 13:56:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 13:19:14 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/26 16:29:10 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
-#include <math.h>
 
 static void	ft_draw_line(t_point a, t_point b, t_var *v)
 {
