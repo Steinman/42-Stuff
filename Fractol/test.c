@@ -6,11 +6,22 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:34:26 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/27 15:00:17 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:17:40 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void		ft_pixel_put(t_var *v, int color)
+{
+	int		i;
+	char	*rgb;
+
+	rgb = (char *)&color;
+	v->add[i] = rgb[0];
+	v->add[++i] = rgb[1];
+	v->add[++i] = rgb[2];
+}
 
 int			ft_escape(int keycode, t_var *v)
 {
