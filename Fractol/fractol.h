@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 16:27:04 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/27 14:04:13 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ typedef struct		s_var
 {
 	void			*mlx;
 	void			*win;
+	void			*img;
+	char			*add;
+	int				bpp;
+	int				line;
+	int				endian;
 }					t_var;
 
 #endif

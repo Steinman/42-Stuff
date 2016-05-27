@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:34:26 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 16:25:32 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/27 15:00:17 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ int			ft_escape(int keycode, t_var *v)
 int			main()
 {
 	t_var	*v;
-	void	*img;
-	char	*info;
-	int		*bpp;
-	int		*line;
 
+	v = (t_var *)malloc(sizeof(t_var) * 1);
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, 800, 800, "mlx_win");
-	img = mlx_new_image(v->mlx, 800, 800);
-	info = mlx_get_data_addr(v->mlx, bpp, line, 0);
-	printf(info);
+	v->img = mlx_new_image(v->mlx, 800, 800);
+	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
+	printf("bpp = %d\n", v->bpp);
+	printf("line = %d\n", v->line);
+	printf("endian = %d\n", v->endian);
+	printf("white = %d\n", mlx_get_color_value(v->mlx, 0xFFFFFF));
 	mlx_key_hook(v->win, ft_escape, v);
 	mlx_loop(v->mlx);
 }
