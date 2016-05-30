@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:34:26 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/27 16:17:40 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/30 12:35:33 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		ft_pixel_put(t_var *v, int color)
 	int		i;
 	char	*rgb;
 
+	i = 0;
+	color = mlx_get_color_value(v->mlx, color);
 	rgb = (char *)&color;
 	v->add[i] = rgb[0];
 	v->add[++i] = rgb[1];
@@ -46,7 +48,8 @@ int			main()
 	printf("bpp = %d\n", v->bpp);
 	printf("line = %d\n", v->line);
 	printf("endian = %d\n", v->endian);
-	printf("white = %d\n", mlx_get_color_value(v->mlx, 0xFFFFFF));
+	ft_pixel_put(v, 0xFFFFFF);
+	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
 	mlx_key_hook(v->win, ft_escape, v);
 	mlx_loop(v->mlx);
 }
