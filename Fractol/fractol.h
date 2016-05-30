@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/27 14:04:13 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/30 15:45:15 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
 # include "mlx.h"
 # include "libft/libft.h"
 
@@ -37,5 +38,7 @@ typedef struct		s_var
 	int				line;
 	int				endian;
 }					t_var;
+
+void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
 
 #endif
