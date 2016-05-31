@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/30 15:45:15 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/05/31 15:43:48 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_var
 	int				bpp;
 	int				line;
 	int				endian;
+	int				type;
 }					t_var;
 
 void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
