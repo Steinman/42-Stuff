@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/31 15:43:48 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/02 17:03:57 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ typedef struct		s_point
 	double			y;
 }					t_point;
 
+typedef struct		s_complex
+{
+	double			r;
+	double			i;
+}					t_complex
+
+typedef struct		s_fractal
+{
+	t_complex		c;
+	t_complex		z;
+	double			x1;
+	double			x2;
+	double			y1;
+	double			y2;
+	double			tmp;
+	int				i;
+	int				imax;
+
+}					t_fractal
+
 typedef struct		s_var
 {
 	void			*mlx;
@@ -38,6 +58,8 @@ typedef struct		s_var
 	int				line;
 	int				endian;
 	int				type;
+	int				win_w;
+	int				win_h;
 }					t_var;
 
 void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
