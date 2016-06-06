@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/06 14:47:27 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/06 15:42:18 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct		s_var
 }					t_var;
 
 void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
-
+void				ft_fract_init(t_var *v);
+int					ft_mandelbrot(t_point a, t_var *v, t_fractal f);
 
 #endif

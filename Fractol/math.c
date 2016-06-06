@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/06 15:02:47 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/06 15:41:12 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ int		ft_mandelbrot(t_point a, t_var *v, t_fractal f)
 		f.z.i = 2 * f.z.i * f.tmp + f.c.i;
 		f.i += 1;
 	}
+	return (0);
 }
