@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 13:53:18 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 13:59:45 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/06 16:35:34 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_emptyline(char *str)
 	int		i;
 
 	i = 0;
-	if (str[0] == '\n')
+	if (str[0] == '\n' || str[0] == '\0')
 		return (-1);
 	while (str[i] != '\0')
 	{
@@ -60,7 +60,7 @@ t_var		*ft_fd_error(t_var *v, int fd, char *file)
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{
 		v->err = -1;
-		ft_putstr("ERROR:invalid file !\n");
+		ft_putstr("ERROR: invalid file !\n");
 		return (v);
 	}
 	v->buf = ft_strnew(1);

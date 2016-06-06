@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:28:08 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 14:01:12 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/06 16:35:10 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ t_var			*ft_open(char *file, t_var *v, int fd)
 	char		**stock;
 
 	v = ft_fd_error(v, fd, file);
+	if (v->err == -1)
+		return (v);
 	if ((v->err = ft_emptyline(v->buf)) == -1)
 	{
 		ft_putstr("ERROR: empty line\n");
