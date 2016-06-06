@@ -6,13 +6,23 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/02 17:03:49 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/06 15:02:47 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		ft_mandelbrot(t_point a, t_var *v, t_fractal f)
+void	ft_fract_init(t_var *v)
+{
+	v->ftl_arr = (t_fractal *)malloc(sizeof(t_fractal) * 1);
+	v->ftl_ptr = NULL;
+	v->ftl_arr[0] = (t_fractal){{0, 0}, {0, 0}, -0.9, 0, 0, 0,
+		v->win_w / (0.6 + 2.1), v->win_h / (1.2 * 1.2),
+		0.5, 0, 0, 50, ft_mandelbrot};
+	v->ftl_ptr = &(v->ftl_arr[0]);
+}
+
+int		ft_mandelbrot(t_point a, t_var *v, t_fractal f)
 {
 	f.c.r = 1.0 * (a.x - v->win_w / 2) / (0.5 * v->win_w) + f.x1;
 	f.c.i = (a.y - v->win_h / 2) / (0.5 * v->win_h) + f.y1;

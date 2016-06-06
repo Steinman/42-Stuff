@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/02 17:03:57 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/06 14:47:27 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct		s_complex
 {
 	double			r;
 	double			i;
-}					t_complex
+}					t_complex;
 
 typedef struct		s_fractal
 {
@@ -46,7 +46,7 @@ typedef struct		s_fractal
 	int				i;
 	int				imax;
 
-}					t_fractal
+}					t_fractal;
 
 typedef struct		s_var
 {
@@ -60,8 +60,11 @@ typedef struct		s_var
 	int				type;
 	int				win_w;
 	int				win_h;
+	t_fractal		*ftl_ptr;
+	t_fractal		*ftl_arr;
 }					t_var;
 
 void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
+
 
 #endif
