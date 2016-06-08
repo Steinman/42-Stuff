@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/06 15:42:18 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/08 15:54:22 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,14 @@ typedef struct		s_complex
 	double			i;
 }					t_complex;
 
-typedef struct		s_fractal
+typedef struct		s_hsv
 {
-	t_complex		c;
-	t_complex		z;
-	double			x1;
-	double			x2;
-	double			y1;
-	double			y2;
-	double			tmp;
-	int				i;
-	int				imax;
-
-}					t_fractal;
+	double			i;
+	double			f;
+	double			l;
+	double			m;
+	double			n;
+}					t_hsv;
 
 typedef struct		s_var
 {
@@ -60,12 +55,11 @@ typedef struct		s_var
 	int				type;
 	int				win_w;
 	int				win_h;
-	t_fractal		*ftl_ptr;
-	t_fractal		*ftl_arr;
+	int				imax;
 }					t_var;
 
 void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
-void				ft_fract_init(t_var *v);
-int					ft_mandelbrot(t_point a, t_var *v, t_fractal f);
+void				ft_mandelbrot(t_var *v);
+void				ft_pixel_put(t_var *v, int x, int y, int color);
 
 #endif

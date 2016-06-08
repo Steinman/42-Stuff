@@ -6,32 +6,83 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/06 15:41:12 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/08 16:43:37 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_fract_init(t_var *v)
+int				ft_hsv(double v, t_var *env, int i)
 {
-	v->ftl_arr = (t_fractal *)malloc(sizeof(t_fractal) * 1);
-	v->ftl_ptr = NULL;
-	v->ftl_arr[0] = (t_fractal){{0, 0}, {0, 0}, -0.9, 0, 0, 0,
-		v->win_w / (0.6 + 2.1), v->win_h / (1.2 * 1.2),
-		0.5, 0, 0, 50, ft_mandelbrot};
-	v->ftl_ptr = &(v->ftl_arr[0]);
+	t_hsv	hsv;
+
+	if (i >= env->imax)
+		return (0x000000);
+	hsv.i = floor(v / 60);
+	hsv.f = (v / 60) - hsv.i;
+	hsv.l = v * (1 - v);
+	hsv.m = v * (1 - hsv.f * v);
+	hsv.n = v * (1 - (1 - hsv.f) * v);
+	hsv.l *= 255;
+	hsv.m *= 255;
+	hsv.n *= 255;
+	v *= 255;
+	if (hsv.i == 0)
+		return (((int)v << 16) + ((int)hsv.n << 8) + (int)hsv.l);
+	else if (hsv.i == 1)
+		return (((int)hsv.m << 16) + ((int)v << 8) + (int)hsv.l);
+	else if (hsv.i == 2)
+		return (((int)hsv.l << 16) + ((int)v << 8) + (int)hsv.n);
+	else if (hsv.i == 3)
+		return (((int)hsv.l << 16) + ((int)hsv.m << 8) + (int)v);
+	else if (hsv.i == 4)
+		return (((int)hsv.n << 16) + ((int)hsv.l << 8) + (int)v);
+	else
+		return (((int)v << 16) + ((int)hsv.l << 8) + (int)hsv.m);
 }
 
-int		ft_mandelbrot(t_point a, t_var *v, t_fractal f)
+void			ft_mandelbrot(t_var *v)
 {
-	f.c.r = 1.0 * (a.x - v->win_w / 2) / (0.5 * v->win_w) + f.x1;
-	f.c.i = (a.y - v->win_h / 2) / (0.5 * v->win_h) + f.y1;
-	while ((f.z.r * f.z.r - f.z.i * f.z.i) < 4 && (f.i < f.imax))
+	t_point		p;
+	t_complex	pix;
+	t_complex	old;
+	t_complex	new;
+	double		zoom;
+	double		movex;
+	double		movey;
+	int			color;
+	int			imax;
+	int			i;
+
+	zoom = 1;
+	movex = -0.5;
+	movey = 0;
+	imax = 300;
+	p.x = 0;
+	p.y = 0;
+	while (p.y < v->win_h)
 	{
-		f.tmp = f.z.r;
-		f.z.r = f.z.r * f.z.r - f.z.i * f.z.i + f.c.r;
-		f.z.i = 2 * f.z.i * f.tmp + f.c.i;
-		f.i += 1;
+		while (p.x < v->win_w)
+		{
+			pix.r = 1.5 * (p.x - v->win_w / 2) / (0.5 * zoom * v->win_w) + movex;
+			pix.i = (p.y - v->win_h / 2) / (0.5 * zoom * v->win_h) + movey;
+			new.r = new.i = old.r = old.i = 0;
+			i = 0;
+			while (i < imax)
+			{
+				old.r = new.r;
+				old.i = new.i;
+				new.r = old.r * old.r - old.i * old.i + pix.r;
+				new.i = 2 * old.r * old.i + pix.i;
+				if ((new.r * new.r + new.i * new.i) > 4)
+					break;
+				i++;
+			}
+			ft_pixel_put(v, p.x, p.y, color = ft_hsv(i % 256, v, i));
+			p.x++;
+		}
+		p.x = 0;
+		p.y++;
 	}
-	return (0);
+	return;
 }
