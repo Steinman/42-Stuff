@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/08 16:43:37 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/09 16:42:14 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,46 +43,55 @@ int				ft_hsv(double v, t_var *env, int i)
 
 void			ft_mandelbrot(t_var *v)
 {
-	t_point		p;
-	t_complex	pix;
-	t_complex	old;
-	t_complex	new;
-	double		zoom;
-	double		movex;
-	double		movey;
-	int			color;
-	int			imax;
+	int			x;
+	int			y;
+	double		imx;
+	double		imy;
+	double		x1;
+	double		x2;
+	double		y1;
+	double		y2;
+	int			zoomx;
+	int			zoomy;
 	int			i;
+	t_complex	c;
+	t_complex	z;
+	double		tmp;
 
-	zoom = 1;
-	movex = -0.5;
-	movey = 0;
-	imax = 300;
-	p.x = 0;
-	p.y = 0;
-	while (p.y < v->win_h)
+	x1 = -2.1;
+	x2 = 0.6;
+	y1 = -1.2;
+	y2 = 1.2;
+	imx = v->win_w;
+	imy = v->win_h;
+	v->imax = 50;
+	zoomx = imx / (x2 - x1);
+	zoomy = imy / (y2 - y1);
+	x = 0;
+	y = 0;
+	while (y < imy)
 	{
-		while (p.x < v->win_w)
+		while (x < imx)
 		{
-			pix.r = 1.5 * (p.x - v->win_w / 2) / (0.5 * zoom * v->win_w) + movex;
-			pix.i = (p.y - v->win_h / 2) / (0.5 * zoom * v->win_h) + movey;
-			new.r = new.i = old.r = old.i = 0;
+			c.r = x / zoomx + x1;
+			c.i = y / zoomy + y1;
+			z.r = 0;
+			z.i = 0;
 			i = 0;
-			while (i < imax)
+			while ((z.r * z.r + z.i * z.i) < 4 && i < v->imax)
 			{
-				old.r = new.r;
-				old.i = new.i;
-				new.r = old.r * old.r - old.i * old.i + pix.r;
-				new.i = 2 * old.r * old.i + pix.i;
-				if ((new.r * new.r + new.i * new.i) > 4)
-					break;
+				tmp = z.r;
+				z.r = z.r * z.r - z.i * z.i + c.r;
+				z.i = 2 * z.i * tmp + c.i;
 				i++;
 			}
-			ft_pixel_put(v, p.x, p.y, color = ft_hsv(i % 256, v, i));
-			p.x++;
+			if (i == v->imax)
+				ft_pixel_put(v, x, y, 0x000000);
+			else
+				ft_pixel_put(v, x, y, ft_hsv(i % 256, v, i));
+			x++;
 		}
-		p.x = 0;
-		p.y++;
+		x = 0;
+		y++;
 	}
-	return;
 }
