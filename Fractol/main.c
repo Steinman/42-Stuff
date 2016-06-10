@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/09 15:51:40 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/10 13:14:56 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_escape(int keycode, t_var *v)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window(v->mlx, v->img);
+		mlx_destroy_image(v->mlx, v->img);
 		mlx_destroy_window(v->mlx, v->win);
 		free(v);
 		exit(0);
@@ -57,9 +57,7 @@ int			main(int ac, char **av)
 	v->win = mlx_new_window(v->mlx, v->win_w, v->win_h, "mlx_win");
 	v->img = mlx_new_image(v->mlx, v->win_w, v->win_h);
 	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
-	printf("win initialized\n");
 	ft_draw_fractal(v);
-	printf("fractal drawed\n");
 	mlx_key_hook(v->win, ft_escape, v);
 	mlx_loop(v->mlx);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/09 16:42:14 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/10 16:08:58 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void			ft_mandelbrot(t_var *v)
 {
 	int			x;
 	int			y;
-	double		imx;
-	double		imy;
 	double		x1;
 	double		x2;
 	double		y1;
@@ -62,16 +60,14 @@ void			ft_mandelbrot(t_var *v)
 	x2 = 0.6;
 	y1 = -1.2;
 	y2 = 1.2;
-	imx = v->win_w;
-	imy = v->win_h;
 	v->imax = 50;
-	zoomx = imx / (x2 - x1);
-	zoomy = imy / (y2 - y1);
+	zoomx = v->win_w / (x2 - x1);
+	zoomy = v->win_h / (y2 - y1);
 	x = 0;
 	y = 0;
-	while (y < imy)
+	while (y < v->win_h)
 	{
-		while (x < imx)
+		while (x < v->win_w)
 		{
 			c.r = x / zoomx + x1;
 			c.i = y / zoomy + y1;
@@ -93,5 +89,58 @@ void			ft_mandelbrot(t_var *v)
 		}
 		x = 0;
 		y++;
+	}
+}
+
+void			ft_mandelbis(t_var *v)
+{
+	int			x;
+	int			y;
+	double		imx;
+	double		imy;
+	double		x1;
+	double		x2;
+	double		y1;
+	double		y2;
+	int			zoom;
+	int			i;
+	double		tmp;
+	t_complex	c;
+	t_complex	z;
+
+	x1 = -2.1;
+	x2 = 0.6;
+	y1 = -1.2;
+	y2 = 1.2;
+	zoom = 100;
+	v->imax = 50;
+	imx = (x2 - x1) * zoom;
+	imy = (y2 - y1) * zoom;
+	x = 0;
+	y = 0;
+	while (x < imx)
+	{
+		while (y < imy)
+		{
+			c.r = x / zoom + x1;
+			c.i = y / zoom + y1;
+			z.r = 0;
+			z.i = 0;
+			i = 0;
+			while ((z.r * z.r + z.i * z.i < 4) && (i < v->imax))
+			{
+				tmp = z.r;
+				z.r = z.r * z.r - z.i * z.i + c.r;
+				z.i = 2 * z.i * tmp + c.i;
+				i++;
+			}
+			if (i == v->imax)
+				ft_pixel_put(v, x, y, 0x000000);
+			else
+				ft_pixel_put(v, x, y, ft_hsv(i % 256, v, i));
+			y++;
+		}
+		y = 0;
+		x++;
 	}
 }
