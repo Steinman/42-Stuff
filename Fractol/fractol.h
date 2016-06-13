@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/10 15:48:45 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/13 11:46:34 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct		s_point
 
 typedef struct		s_complex
 {
-	double			r;
-	double			i;
+	long double		r;
+	long double		i;
 }					t_complex;
 
 typedef struct		s_hsv
@@ -55,7 +55,7 @@ typedef struct		s_var
 	int				type;
 	int				win_w;
 	int				win_h;
-	int				imax;
+	double			imax;
 }					t_var;
 
 void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
