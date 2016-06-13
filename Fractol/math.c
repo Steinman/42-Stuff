@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/13 12:18:55 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/13 15:06:13 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,108 @@ void			ft_mandelbrot(t_var *v)
 				tmp = z.r;
 				z.r = z.r * z.r - z.i * z.i + c.r;
 				z.i = 2 * z.i * tmp + c.i;
+				i++;
+			}
+			if (i == v->imax)
+				ft_pixel_put(v, x, y, 0x000000);
+			else
+				ft_pixel_put(v, x, y, ft_hsv((int)i % 256, v, i));
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
+void			ft_julia(t_var *v)
+{
+	int			x;
+	int			y;
+	float		x1;
+	float		x2;
+	float		y1;
+	float		y2;
+	double		zoomx;
+	double		zoomy;
+	double		i;
+	t_complex	c;
+	t_complex	z;
+	double		tmp;
+
+	x1 = -1;
+	x2 = 1;
+	y1 = -1.2;
+	y2 = 1.2;
+	v->imax = 150;
+	zoomx = v->win_w / (x2 - x1);
+	zoomy = v->win_h / (y2 - y1);
+	x = 0;
+	y = 0;
+	while (y < v->win_h)
+	{
+		while (x < v->win_w)
+		{
+			c.r = 0.285;
+			c.i = 0.01;
+			z.r = x / zoomx + x1;
+			z.i = y / zoomy + y1;
+			i = 0;
+			while ((z.r * z.r + z.i * z.i) < 4 && i < v->imax)
+			{
+				tmp = z.r;
+				z.r = z.r * z.r - z.i * z.i + c.r;
+				z.i = 2 * z.i * tmp + c.i;
+				i++;
+			}
+			if (i == v->imax)
+				ft_pixel_put(v, x, y, 0x000000);
+			else
+				ft_pixel_put(v, x, y, ft_hsv((int)i % 256, v, i));
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
+void			ft_mandelbar(t_var *v)
+{
+	int			x;
+	int			y;
+	float		x1;
+	float		x2;
+	float		y1;
+	float		y2;
+	double		zoomx;
+	double		zoomy;
+	double		i;
+	t_complex	c;
+	t_complex	z;
+	double		tmp;
+
+	x1 = -2.1;
+	x2 = 0.6;
+	y1 = -1.2;
+	y2 = 1.2;
+	v->imax = 50;
+	zoomx = v->win_w / (x2 - x1);
+	zoomy = v->win_h / (y2 - y1);
+	x = 0;
+	y = 0;
+	while (y < v->win_h)
+	{
+		while (x < v->win_w)
+		{
+			c.r = x / zoomx + x1;
+			c.i = y / zoomy + y1;
+			z.r = 0;
+			z.i = 0;
+			i = 0;
+			while ((z.r * z.r + z.i * z.i) < 4 && i < v->imax)
+			{
+				tmp = z.r;
+				z.r = z.r * z.r - z.i * z.i + c.r;
+				z.i = -2 * z.i * tmp + c.i;
 				i++;
 			}
 			if (i == v->imax)

@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/10 13:14:56 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/13 15:08:49 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_check_param(int ac, char **av, t_var *v)
 	v->type = 0;
 	if (ac != 2)
 	{
-		ft_putstr("ERROR: only one parameter is allowed! try with mandelbrot or julia\n");
+		ft_putstr("ERROR: only one parameter is allowed! try with mandelbrot, julia or mandelbar\n");
 		free(v);
 		exit(0);
 	}
@@ -37,9 +37,11 @@ static void	ft_check_param(int ac, char **av, t_var *v)
 		v->type = 1;
 	if (ft_strcmp(av[1], "julia") == 0)
 		v->type = 2;
+	if (ft_strcmp(av[1], "mandelbar") == 0)
+		v->type = 3;
 	if (v->type == 0)
 	{
-		ft_putstr("ERROR: invalid parameter! try with mandelbrot or julia\n");
+		ft_putstr("ERROR: invalid parameter! try with mandelbrot, julia or mandelbar\n");
 		free(v);
 		exit(0);
 	}
