@@ -6,13 +6,13 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/13 15:06:13 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/15 16:25:02 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int				ft_hsv(double v, t_var *env, int i)
+int				ft_hsv(double v, t_ftl *env, int i)
 {
 	t_hsv	hsv;
 
@@ -43,153 +43,123 @@ int				ft_hsv(double v, t_var *env, int i)
 
 void			ft_mandelbrot(t_var *v)
 {
-	int			x;
-	int			y;
-	float		x1;
-	float		x2;
-	float		y1;
-	float		y2;
-	double		zoomx;
-	double		zoomy;
-	double		i;
-	t_complex	c;
-	t_complex	z;
-	double		tmp;
+	t_ftl		*ftl;
 
-	x1 = -2.1;
-	x2 = 0.6;
-	y1 = -1.2;
-	y2 = 1.2;
-	v->imax = 50;
-	zoomx = v->win_w / (x2 - x1);
-	zoomy = v->win_h / (y2 - y1);
-	x = 0;
-	y = 0;
-	while (y < v->win_h)
+	ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
+	ftl->x1 = -2.1 + v->s;
+	ftl->x2 = 0.6 + v->s;
+	ftl->y1 = -1.2 + v->s;
+	ftl->y2 = 1.2 + v->s;
+	ftl->imax = 50;
+	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1)) * v->mul;
+	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1)) * v->mul;
+	ftl->a.x = 0;
+	ftl->a.y = 0;
+	while (ftl->a.y < v->win_h)
 	{
-		while (x < v->win_w)
+		while (ftl->a.x < v->win_w)
 		{
-			c.r = x / zoomx + x1;
-			c.i = y / zoomy + y1;
-			z.r = 0;
-			z.i = 0;
-			i = 0;
-			while ((z.r * z.r + z.i * z.i) < 4 && i < v->imax)
+			ftl->c.r = ftl->a.x / ftl->zoomx + ftl->x1;
+			ftl->c.i = ftl->a.y / ftl->zoomy + ftl->y1;
+			ftl->z.r = 0;
+			ftl->z.i = 0;
+			ftl->i = 0;
+			while ((ftl->z.r * ftl->z.r + ftl->z.i * ftl->z.i) < 4 && ftl->i < ftl->imax)
 			{
-				tmp = z.r;
-				z.r = z.r * z.r - z.i * z.i + c.r;
-				z.i = 2 * z.i * tmp + c.i;
-				i++;
+				ftl->tmp = ftl->z.r;
+				ftl->z.r = ftl->z.r * ftl->z.r - ftl->z.i * ftl->z.i + ftl->c.r;
+				ftl->z.i = 2 * ftl->z.i * ftl->tmp + ftl->c.i;
+				ftl->i++;
 			}
-			if (i == v->imax)
-				ft_pixel_put(v, x, y, 0x000000);
+			if (ftl->i == ftl->imax)
+				ft_pixel_put(v, ftl->a.x, ftl->a.y, 0x000000);
 			else
-				ft_pixel_put(v, x, y, ft_hsv((int)i % 256, v, i));
-			x++;
+				ft_pixel_put(v, ftl->a.x, ftl->a.y, ft_hsv((int)ftl->i % 256, ftl, ftl->i));
+			ftl->a.x++;
 		}
-		x = 0;
-		y++;
+		ftl->a.x = 0;
+		ftl->a.y++;
 	}
 }
 
 void			ft_julia(t_var *v)
 {
-	int			x;
-	int			y;
-	float		x1;
-	float		x2;
-	float		y1;
-	float		y2;
-	double		zoomx;
-	double		zoomy;
-	double		i;
-	t_complex	c;
-	t_complex	z;
-	double		tmp;
+	t_ftl		*ftl;
 
-	x1 = -1;
-	x2 = 1;
-	y1 = -1.2;
-	y2 = 1.2;
-	v->imax = 150;
-	zoomx = v->win_w / (x2 - x1);
-	zoomy = v->win_h / (y2 - y1);
-	x = 0;
-	y = 0;
-	while (y < v->win_h)
+	ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
+	ftl->x1 = -1 + v->s;
+	ftl->x2 = 1 + v->s;
+	ftl->y1 = -1.2 + v->s;
+	ftl->y2 = 1.2 + v->s;
+	ftl->imax = 150;
+	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1)) * v->mul;
+	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1)) * v->mul;
+	ftl->a.x = 0;
+	ftl->a.y = 0;
+	while (ftl->a.y < v->win_h)
 	{
-		while (x < v->win_w)
+		while (ftl->a.x < v->win_w)
 		{
-			c.r = 0.285;
-			c.i = 0.01;
-			z.r = x / zoomx + x1;
-			z.i = y / zoomy + y1;
-			i = 0;
-			while ((z.r * z.r + z.i * z.i) < 4 && i < v->imax)
+			ftl->c.r = 0.285;
+			ftl->c.i = 0.01;
+			ftl->z.r = ftl->a.x / ftl->zoomx + ftl->x1;
+			ftl->z.i = ftl->a.y / ftl->zoomy + ftl->y1;
+			ftl->i = 0;
+			while ((ftl->z.r * ftl->z.r + ftl->z.i * ftl->z.i) < 4 && ftl->i < ftl->imax)
 			{
-				tmp = z.r;
-				z.r = z.r * z.r - z.i * z.i + c.r;
-				z.i = 2 * z.i * tmp + c.i;
-				i++;
+				ftl->tmp = ftl->z.r;
+				ftl->z.r = ftl->z.r * ftl->z.r - ftl->z.i * ftl->z.i + ftl->c.r;
+				ftl->z.i = 2 * ftl->z.i * ftl->tmp + ftl->c.i;
+				ftl->i++;
 			}
-			if (i == v->imax)
-				ft_pixel_put(v, x, y, 0x000000);
+			if (ftl->i == ftl->imax)
+				ft_pixel_put(v, ftl->a.x, ftl->a.y, 0x000000);
 			else
-				ft_pixel_put(v, x, y, ft_hsv((int)i % 256, v, i));
-			x++;
+				ft_pixel_put(v, ftl->a.x, ftl->a.y, ft_hsv((int)ftl->i % 256, ftl, ftl->i));
+			ftl->a.x++;
 		}
-		x = 0;
-		y++;
+		ftl->a.x = 0;
+		ftl->a.y++;
 	}
 }
 
 void			ft_mandelbar(t_var *v)
 {
-	int			x;
-	int			y;
-	float		x1;
-	float		x2;
-	float		y1;
-	float		y2;
-	double		zoomx;
-	double		zoomy;
-	double		i;
-	t_complex	c;
-	t_complex	z;
-	double		tmp;
+	t_ftl		*ftl;
 
-	x1 = -2.1;
-	x2 = 0.6;
-	y1 = -1.2;
-	y2 = 1.2;
-	v->imax = 50;
-	zoomx = v->win_w / (x2 - x1);
-	zoomy = v->win_h / (y2 - y1);
-	x = 0;
-	y = 0;
-	while (y < v->win_h)
+	ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
+	ftl->x1 = -2.1 + v->s;
+	ftl->x2 = 0.6 + v->s;
+	ftl->y1 = -1.2 + v->s;
+	ftl->y2 = 1.2 + v->s;
+	ftl->imax = 50;
+	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1)) * v->mul;
+	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1)) * v->mul;
+	ftl->a.x = 0;
+	ftl->a.y = 0;
+	while (ftl->a.y < v->win_h)
 	{
-		while (x < v->win_w)
+		while (ftl->a.x < v->win_w)
 		{
-			c.r = x / zoomx + x1;
-			c.i = y / zoomy + y1;
-			z.r = 0;
-			z.i = 0;
-			i = 0;
-			while ((z.r * z.r + z.i * z.i) < 4 && i < v->imax)
+			ftl->c.r = ftl->a.x / ftl->zoomx + ftl->x1;
+			ftl->c.i = ftl->a.y / ftl->zoomy + ftl->y1;
+			ftl->z.r = 0;
+			ftl->z.i = 0;
+			ftl->i = 0;
+			while ((ftl->z.r * ftl->z.r + ftl->z.i * ftl->z.i) < 4 && ftl->i < ftl->imax)
 			{
-				tmp = z.r;
-				z.r = z.r * z.r - z.i * z.i + c.r;
-				z.i = -2 * z.i * tmp + c.i;
-				i++;
+				ftl->tmp = ftl->z.r;
+				ftl->z.r = ftl->z.r * ftl->z.r - ftl->z.i * ftl->z.i + ftl->c.r;
+				ftl->z.i = -2 * ftl->z.i * ftl->tmp + ftl->c.i;
+				ftl->i++;
 			}
-			if (i == v->imax)
-				ft_pixel_put(v, x, y, 0x000000);
+			if (ftl->i == ftl->imax)
+				ft_pixel_put(v, ftl->a.x, ftl->a.y, 0x000000);
 			else
-				ft_pixel_put(v, x, y, ft_hsv((int)i % 256, v, i));
-			x++;
+				ft_pixel_put(v, ftl->a.x, ftl->a.y, ft_hsv((int)ftl->i % 256, ftl, ftl->i));
+			ftl->a.x++;
 		}
-		x = 0;
-		y++;
+		ftl->a.x = 0;
+		ftl->a.y++;
 	}
 }

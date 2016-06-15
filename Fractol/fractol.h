@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/13 15:07:17 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/15 16:08:18 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,22 @@ typedef struct		s_hsv
 	double			n;
 }					t_hsv;
 
+typedef struct		s_ftl
+{
+	t_point			a;
+	float			x1;
+	float			x2;
+	float			y1;
+	float			y2;
+	double			zoomx;
+	double			zoomy;
+	double			i;
+	double			imax;
+	double			tmp;
+	t_complex		c;
+	t_complex		z;
+}					t_ftl;
+
 typedef struct		s_var
 {
 	void			*mlx;
@@ -55,7 +71,8 @@ typedef struct		s_var
 	int				type;
 	int				win_w;
 	int				win_h;
-	double			imax;
+	double			mul;
+	double			s;
 }					t_var;
 
 void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
