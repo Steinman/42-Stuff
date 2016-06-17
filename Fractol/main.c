@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/15 16:15:14 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/17 14:31:29 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,11 @@
 
 static int	ft_key(int keycode, t_var *v)
 {
-	printf("keycode = %d\n", keycode);
+	//printf("keycode = %d\n", keycode);
 	if (keycode == 126)
-	{
-		v->mul += 0.1;
 		v->s += 0.1;
-		ft_draw_fractal(v);
-	}
 	if (keycode == 125)
-	{
-		v->mul -= 0.1;
 		v->s -= 0.1;
-		ft_draw_fractal(v);
-	}
 	if (keycode == 53)
 	{
 		mlx_destroy_image(v->mlx, v->img);
@@ -72,10 +64,9 @@ int			main(int ac, char **av)
 	v->win = mlx_new_window(v->mlx, v->win_w, v->win_h, "mlx_win");
 	v->img = mlx_new_image(v->mlx, v->win_w, v->win_h);
 	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
-	v->mul = 1;
 	v->s = 0;
-	ft_draw_fractal(v);
 	mlx_key_hook(v->win, ft_key, v);
+	mlx_loop_hook(v->mlx, ft_draw_fractal, v);
 	mlx_loop(v->mlx);
 	return (0);
 }

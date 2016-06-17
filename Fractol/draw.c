@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:28:01 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/13 15:09:11 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/17 14:40:04 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,10 @@ void		ft_pixel_put(t_var *v, int x, int y, int color)
 	char	*rgb;
 
 	i = x * (v->bpp / 8) + (y * v->line);
-	color = mlx_get_color_value(v->mlx, color);
 	rgb = (char *)&color;
 	v->add[i] = rgb[0];
 	v->add[++i] = rgb[1];
 	v->add[++i] = rgb[2];
-}
-
-void		ft_draw_line(t_point a, t_point b, t_var *v, int color)
-{
-	double	x0;
-	double	y0;
-	float	dx;
-	float	dy;
-	double	tx;
-
-	tx = 0.0;
-	dx = b.x - a.x;
-	dy = b.y - a.y;
-	while (tx <= 1)
-	{
-		x0 = a.x + (dx * tx);
-		y0 = a.y + (dy * tx);
-		ft_pixel_put(v, x0, y0, color);
-		tx += 1. / sqrtf((dx * dx) + (dy * dy));
-	}
 }
 
 int			ft_draw_fractal(t_var *v)

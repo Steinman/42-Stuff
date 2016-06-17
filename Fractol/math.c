@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/15 16:25:02 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/06/17 14:48:32 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void			ft_mandelbrot(t_var *v)
 
 	ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
 	ftl->x1 = -2.1 + v->s;
-	ftl->x2 = 0.6 + v->s;
+	ftl->x2 = 0.6 - v->s;
 	ftl->y1 = -1.2 + v->s;
-	ftl->y2 = 1.2 + v->s;
+	ftl->y2 = 1.2 - v->s;
 	ftl->imax = 50;
-	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1)) * v->mul;
-	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1)) * v->mul;
+	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1));
+	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1));
 	ftl->a.x = 0;
 	ftl->a.y = 0;
 	while (ftl->a.y < v->win_h)
@@ -80,6 +80,7 @@ void			ft_mandelbrot(t_var *v)
 		ftl->a.x = 0;
 		ftl->a.y++;
 	}
+	free(ftl);
 }
 
 void			ft_julia(t_var *v)
@@ -88,12 +89,12 @@ void			ft_julia(t_var *v)
 
 	ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
 	ftl->x1 = -1 + v->s;
-	ftl->x2 = 1 + v->s;
+	ftl->x2 = 1 - v->s;
 	ftl->y1 = -1.2 + v->s;
-	ftl->y2 = 1.2 + v->s;
+	ftl->y2 = 1.2 - v->s;
 	ftl->imax = 150;
-	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1)) * v->mul;
-	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1)) * v->mul;
+	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1));
+	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1));
 	ftl->a.x = 0;
 	ftl->a.y = 0;
 	while (ftl->a.y < v->win_h)
@@ -121,6 +122,7 @@ void			ft_julia(t_var *v)
 		ftl->a.x = 0;
 		ftl->a.y++;
 	}
+	free(ftl);
 }
 
 void			ft_mandelbar(t_var *v)
@@ -129,12 +131,12 @@ void			ft_mandelbar(t_var *v)
 
 	ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
 	ftl->x1 = -2.1 + v->s;
-	ftl->x2 = 0.6 + v->s;
+	ftl->x2 = 0.6 - v->s;
 	ftl->y1 = -1.2 + v->s;
-	ftl->y2 = 1.2 + v->s;
+	ftl->y2 = 1.2 - v->s;
 	ftl->imax = 50;
-	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1)) * v->mul;
-	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1)) * v->mul;
+	ftl->zoomx = (v->win_w / (ftl->x2 - ftl->x1));
+	ftl->zoomy = (v->win_h / (ftl->y2 - ftl->y1));
 	ftl->a.x = 0;
 	ftl->a.y = 0;
 	while (ftl->a.y < v->win_h)
@@ -162,4 +164,5 @@ void			ft_mandelbar(t_var *v)
 		ftl->a.x = 0;
 		ftl->a.y++;
 	}
+	free(ftl);
 }
