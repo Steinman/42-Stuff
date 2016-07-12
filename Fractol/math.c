@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/17 14:48:32 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/07/12 16:42:44 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,16 @@ void			ft_julia(t_var *v)
 	{
 		while (ftl->a.x < v->win_w)
 		{
-			ftl->c.r = 0.285;
-			ftl->c.i = 0.01;
+			v->c.r = 0.285;
+			v->c.i = 0.01;
 			ftl->z.r = ftl->a.x / ftl->zoomx + ftl->x1;
 			ftl->z.i = ftl->a.y / ftl->zoomy + ftl->y1;
 			ftl->i = 0;
 			while ((ftl->z.r * ftl->z.r + ftl->z.i * ftl->z.i) < 4 && ftl->i < ftl->imax)
 			{
 				ftl->tmp = ftl->z.r;
-				ftl->z.r = ftl->z.r * ftl->z.r - ftl->z.i * ftl->z.i + ftl->c.r;
-				ftl->z.i = 2 * ftl->z.i * ftl->tmp + ftl->c.i;
+				ftl->z.r = ftl->z.r * ftl->z.r - ftl->z.i * ftl->z.i + v->c.r;
+				ftl->z.i = 2 * ftl->z.i * ftl->tmp + v->c.i;
 				ftl->i++;
 			}
 			if (ftl->i == ftl->imax)

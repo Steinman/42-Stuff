@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/17 14:31:29 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/07/12 17:08:24 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			main(int ac, char **av)
 	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
 	v->s = 0;
 	mlx_key_hook(v->win, ft_key, v);
+	//mlx_mouse_hook(v->win, ft_julia_param, v);
 	mlx_loop_hook(v->mlx, ft_draw_fractal, v);
 	mlx_loop(v->mlx);
 	return (0);

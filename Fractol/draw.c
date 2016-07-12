@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:28:01 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/06/17 14:40:04 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/07/12 17:08:07 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,11 @@ int			ft_draw_fractal(t_var *v)
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
 	return (1);
 }
+
+/*void		ft_julia_param(t_var *v)
+{
+	if (v->type == 2)
+	{
+		
+	}
+}*\
