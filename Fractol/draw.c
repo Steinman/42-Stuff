@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:28:01 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/07/12 17:08:07 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/08/01 14:46:52 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,16 @@ int			ft_draw_fractal(t_var *v)
 	return (1);
 }
 
-/*void		ft_julia_param(t_var *v)
+int			ft_julia_param(int button, int x, int y, t_var *v)
 {
+	x = 0;
+	y = 0;
 	if (v->type == 2)
 	{
-		
+		if (button == 5)
+			v->c.r += 0.1;
+		if (button == 4)
+			v->c.r -= 0.1;
 	}
-}*\
+	return (0);
+}

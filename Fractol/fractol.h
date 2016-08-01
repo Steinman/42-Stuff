@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/07/12 16:40:09 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/08/01 13:52:57 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct		s_var
 	int				win_h;
 	float			s;
 	t_complex		c;
+	int				xmouse;
+	int				ymouse;
 }					t_var;
 
 void				ft_draw_line(t_point a, t_point b, t_var *v, int color);
@@ -81,5 +83,6 @@ void				ft_julia(t_var *v);
 void				ft_mandelbar(t_var *v);
 void				ft_pixel_put(t_var *v, int x, int y, int color);
 int					ft_draw_fractal(t_var *v);
+int					ft_julia_param(int button,int x, int y, t_var *v);
 
 #endif
