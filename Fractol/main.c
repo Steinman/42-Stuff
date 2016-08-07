@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/08/01 13:49:28 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/08/07 16:17:13 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 static int	ft_key(int keycode, t_var *v)
 {
-	//printf("keycode = %d\n", keycode);
-	if (keycode == 126)
-		v->s += 0.1;
-	if (keycode == 125)
-		v->s -= 0.1;
+	printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_image(v->mlx, v->img);
@@ -62,12 +58,11 @@ int			main(int ac, char **av)
 	v->win_h = 800;
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->win_w, v->win_h, "mlx_win");
-	v->img = mlx_new_image(v->mlx, v->win_w, v->win_h);
-	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
+	mlx_expose_hook(v->win, ft_expose, v);
 	v->s = 0;
 	mlx_key_hook(v->win, ft_key, v);
-	mlx_mouse_hook(v->win, ft_julia_param, v);
-	mlx_loop_hook(v->mlx, ft_draw_fractal, v);
+	mlx_hook(v->win, 0, 0, ft_motion, v);
+	mlx_mouse_hook(v->win, ft_mouse, v);
 	mlx_loop(v->mlx);
 	return (0);
 }
