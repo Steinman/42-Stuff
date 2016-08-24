@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/08/18 15:59:23 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/08/24 16:48:00 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			ft_mandelbrot(t_var *v)
 	v->ftl->x2 = 0.6 - v->s;
 	v->ftl->y1 = -1.2 + v->s;
 	v->ftl->y2 = 1.2 - v->s;
-	v->ftl->imax = 50;
+	v->ftl->imax = 30;
 	v->ftl->zoomx = (v->win_w / (v->ftl->x2 - v->ftl->x1));
 	v->ftl->zoomy = (v->win_h / (v->ftl->y2 - v->ftl->y1));
 	v->ftl->a.x = 0;

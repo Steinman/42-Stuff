@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:28:01 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/08/07 16:12:18 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/08/24 16:59:12 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int			ft_motion(int x, int y, t_var *v)
 {
 	if (x >= 0 && x <= v->win_w && y>= 0 && y <= v->win_h)
 	{
+		v->xmouse = x;
+		v->ymouse = y;
 		mlx_destroy_image(v->mlx, v->img);
 		mlx_clear_window(v->mlx, v->img);
 		ft_expose(v);
