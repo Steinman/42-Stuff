@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/08/24 16:48:00 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/08/24 17:56:12 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ void			ft_julia(t_var *v)
 	{
 		while (v->ftl->a.x < v->win_w)
 		{
-			v->c.r = 0.285;
-			v->c.i = 0.01;
+			//v->c.r = 0.285;
+			//v->c.i = 0.01;
 			v->ftl->z.r = v->ftl->a.x / v->ftl->zoomx + v->ftl->x1;
 			v->ftl->z.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
 			v->ftl->i = 0;
