@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/08/24 16:59:03 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/05 14:00:26 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			main(int ac, char **av)
 	mlx_expose_hook(v->win, ft_expose, v);
 	v->s = 0;
 	mlx_key_hook(v->win, ft_key, v);
-	mlx_hook(v->win, 0, 0, ft_motion, v);
+	mlx_hook(v->win, 6, (1L << 6), ft_motion, v);
 	mlx_mouse_hook(v->win, ft_mouse, v);
 	mlx_loop(v->mlx);
 	return (0);

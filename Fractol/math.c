@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/08/24 17:56:12 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/05 15:39:09 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,12 @@ void			ft_julia(t_var *v)
 			//v->c.i = 0.01;
 			v->ftl->z.r = v->ftl->a.x / v->ftl->zoomx + v->ftl->x1;
 			v->ftl->z.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
-			v->ftl->i = 0;
-			while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && v->ftl->i < v->ftl->imax)
+			v->ftl->i = -1;
+			while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++v->ftl->i < v->ftl->imax)
 			{
 				v->ftl->tmp = v->ftl->z.r;
 				v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->c.r;
 				v->ftl->z.i = 2 * v->ftl->z.i * v->ftl->tmp + v->c.i;
-				v->ftl->i++;
 			}
 			if (v->ftl->i == v->ftl->imax)
 				ft_pixel_put(v, v->ftl->a.x, v->ftl->a.y, 0x000000);
