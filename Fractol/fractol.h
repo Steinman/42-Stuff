@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/08/07 16:07:06 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/06 15:16:46 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void				ft_mandelbrot(t_var *v);
 void				ft_julia(t_var *v);
 void				ft_mandelbar(t_var *v);
 void				ft_pixel_put(t_var *v, int x, int y, int color);
+void				ft_mandel_init(t_var *v);
 int					ft_draw_fractal(t_var *v);
 int					ft_mouse(int button,int x, int y, t_var *v);
 int					ft_motion(int x, int y, t_var *v);
-int					ft_expose(t_var *v);
 
 #endif

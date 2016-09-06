@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/05 15:39:09 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/06 15:42:47 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,7 @@ int				ft_hsv(double v, t_ftl *env, int i)
 
 void			ft_mandelbrot(t_var *v)
 {
-	//printf("start drawing\n");
-	v->ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
-	v->ftl->x1 = -2.1 + v->s;
-	v->ftl->x2 = 0.6 - v->s;
-	v->ftl->y1 = -1.2 + v->s;
-	v->ftl->y2 = 1.2 - v->s;
-	v->ftl->imax = 30;
-	v->ftl->zoomx = (v->win_w / (v->ftl->x2 - v->ftl->x1));
-	v->ftl->zoomy = (v->win_h / (v->ftl->y2 - v->ftl->y1));
-	v->ftl->a.x = 0;
-	v->ftl->a.y = 0;
+	ft_mandel_init(v);
 	while (v->ftl->a.y < v->win_h)
 	{
 		while (v->ftl->a.x < v->win_w)
@@ -62,13 +52,12 @@ void			ft_mandelbrot(t_var *v)
 			v->ftl->c.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
 			v->ftl->z.r = 0;
 			v->ftl->z.i = 0;
-			v->ftl->i = 0;
-			while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && v->ftl->i < v->ftl->imax)
+			v->ftl->i = -1;
+			while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++v->ftl->i < v->ftl->imax)
 			{
 				v->ftl->tmp = v->ftl->z.r;
 				v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->ftl->c.r;
 				v->ftl->z.i = 2 * v->ftl->z.i * v->ftl->tmp + v->ftl->c.i;
-				v->ftl->i++;
 			}
 			if (v->ftl->i == v->ftl->imax)
 				ft_pixel_put(v, v->ftl->a.x, v->ftl->a.y, 0x000000);
@@ -80,7 +69,6 @@ void			ft_mandelbrot(t_var *v)
 		v->ftl->a.y++;
 	}
 	free(v->ftl);
-	//printf("finished drawing\n");
 }
 
 void			ft_julia(t_var *v)
@@ -99,8 +87,6 @@ void			ft_julia(t_var *v)
 	{
 		while (v->ftl->a.x < v->win_w)
 		{
-			//v->c.r = 0.285;
-			//v->c.i = 0.01;
 			v->ftl->z.r = v->ftl->a.x / v->ftl->zoomx + v->ftl->x1;
 			v->ftl->z.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
 			v->ftl->i = -1;
@@ -124,16 +110,7 @@ void			ft_julia(t_var *v)
 
 void			ft_mandelbar(t_var *v)
 {
-	v->ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
-	v->ftl->x1 = -2.1 + v->s;
-	v->ftl->x2 = 0.6 - v->s;
-	v->ftl->y1 = -1.2 + v->s;
-	v->ftl->y2 = 1.2 - v->s;
-	v->ftl->imax = 50;
-	v->ftl->zoomx = (v->win_w / (v->ftl->x2 - v->ftl->x1));
-	v->ftl->zoomy = (v->win_h / (v->ftl->y2 - v->ftl->y1));
-	v->ftl->a.x = 0;
-	v->ftl->a.y = 0;
+	ft_mandel_init(v);
 	while (v->ftl->a.y < v->win_h)
 	{
 		while (v->ftl->a.x < v->win_w)
@@ -142,13 +119,12 @@ void			ft_mandelbar(t_var *v)
 			v->ftl->c.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
 			v->ftl->z.r = 0;
 			v->ftl->z.i = 0;
-			v->ftl->i = 0;
-			while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && v->ftl->i < v->ftl->imax)
+			v->ftl->i = -1;
+			while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++v->ftl->i < v->ftl->imax)
 			{
 				v->ftl->tmp = v->ftl->z.r;
 				v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->ftl->c.r;
 				v->ftl->z.i = -2 * v->ftl->z.i * v->ftl->tmp + v->ftl->c.i;
-				v->ftl->i++;
 			}
 			if (v->ftl->i == v->ftl->imax)
 				ft_pixel_put(v, v->ftl->a.x, v->ftl->a.y, 0x000000);

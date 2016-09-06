@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:28:01 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/05 15:38:56 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/06 15:40:15 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ void		ft_pixel_put(t_var *v, int x, int y, int color)
 	}
 }
 
-int			ft_expose(t_var *v)
-{
-	v->img = mlx_new_image(v->mlx, v->win_w, v->win_h);
-	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
-	ft_draw_fractal(v);
-	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
-	return (0);
-}
-
 int			ft_draw_fractal(t_var *v)
 {
 	mlx_clear_window(v->mlx, v->win);
@@ -47,6 +38,7 @@ int			ft_draw_fractal(t_var *v)
 		ft_julia(v);
 	if (v->type == 3)
 		ft_mandelbar(v);
+	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
 	return (1);
 }
 
@@ -58,20 +50,18 @@ int			ft_mouse(int button, int x, int y, t_var *v)
 			v->s += 0.1;
 		if (button == 4 || button == 2)
 			v->s -= 0.1;
-		mlx_destroy_image(v->mlx, v->img);
-		mlx_clear_window(v->mlx, v->win);
-		ft_expose(v);
+		ft_draw_fractal(v);
 	}
 	return (0);
 }
 
 int			ft_motion(int x, int y, t_var *v)
 {
-	if (x >= 0 && x <= v->win_w && y>= 0 && y <= v->win_h && v->type == 2)
+	if (x >= 0 && x <= v->win_w && y >= 0 && y <= v->win_h && v->type == 2)
 	{
 		v->c.r = -3.2 + ((x * 3.4) / v->win_w);
 		v->c.i = -3.2 + ((y * 3.4) / v->win_h);
-		ft_expose(v);
+		ft_draw_fractal(v);
 	}
 	return (0);
 }

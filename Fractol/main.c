@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/05 14:00:26 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/06 15:43:27 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ int			main(int ac, char **av)
 	v->win_h = 800;
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->win_w, v->win_h, "mlx_win");
-	mlx_expose_hook(v->win, ft_expose, v);
+	v->img = mlx_new_image(v->mlx, v->win_w, v->win_h);
+	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
 	v->s = 0;
 	mlx_key_hook(v->win, ft_key, v);
 	mlx_hook(v->win, 6, (1L << 6), ft_motion, v);
 	mlx_mouse_hook(v->win, ft_mouse, v);
+	mlx_expose_hook(v->win, ft_draw_fractal, v);
 	mlx_loop(v->mlx);
 	return (0);
 }
