@@ -6,7 +6,7 @@
 #    By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 16:54:52 by hcorrale          #+#    #+#              #
-#    Updated: 2016/09/06 14:27:37 by hcorrale         ###   ########.fr        #
+#    Updated: 2016/09/08 12:44:14 by hcorrale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ PATH_OBJ = ./
 PATH_INC = ./libft
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 
 HEAD = fractol.h
 

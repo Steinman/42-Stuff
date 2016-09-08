@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/06 15:43:27 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/08 14:37:25 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,22 @@ static void	ft_check_param(int ac, char **av, t_var *v)
 	}
 }
 
+static void	ft_mandel_check(t_var *v)
+{
+	v->mandel = 0;
+	if (v->type == 1 || v->type == 2)
+		v->mandel = 2;
+	else if (v->type == 3)
+		v->mandel = -2;
+}
+
 int			main(int ac, char **av)
 {
 	t_var	*v;
 
 	v = (t_var *)malloc(sizeof(t_var) * 1);
 	ft_check_param(ac, av, v);
+	ft_mandel_check(v);
 	v->win_w = 800;
 	v->win_h = 800;
 	v->mlx = mlx_init();

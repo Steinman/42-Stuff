@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:28:01 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/06 15:40:15 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/08 14:52:39 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,16 @@ void		ft_pixel_put(t_var *v, int x, int y, int color)
 	}
 }
 
-int			ft_draw_fractal(t_var *v)
+/*int			ft_draw_fractal(t_var *v)
 {
 	mlx_clear_window(v->mlx, v->win);
-	if (v->type == 1)
+	if (v->type == 1 || v->type == 3)
 		ft_mandelbrot(v);
 	if (v->type == 2)
 		ft_julia(v);
-	if (v->type == 3)
-		ft_mandelbar(v);
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
 	return (1);
-}
+}*/
 
 int			ft_mouse(int button, int x, int y, t_var *v)
 {
