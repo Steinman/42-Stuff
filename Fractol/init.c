@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 13:46:46 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/08 14:47:10 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/15 13:26:38 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		ft_mandel_init(t_var *v)
 {
-	v->ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
 	v->ftl->x1 = -2.1 + v->s;
 	v->ftl->x2 = 0.6 - v->s;
 	v->ftl->y1 = -1.2 + v->s;
@@ -26,7 +25,6 @@ void		ft_mandel_init(t_var *v)
 
 void		ft_julia_init(t_var *v)
 {
-	v->ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
 	v->ftl->x1 = -1 + v->s;
 	v->ftl->x2 = 1 - v->s;
 	v->ftl->y1 = -1.2 + v->s;

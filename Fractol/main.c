@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/08 14:37:25 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/15 15:06:30 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ int			main(int ac, char **av)
 	v->img = mlx_new_image(v->mlx, v->win_w, v->win_h);
 	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
 	v->s = 0;
+	v->ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
+	v->minx = -3.2;
+	v->miny = -3.2;
+	v->maxx = 3.4;
+	v->maxy = 3.4;
 	mlx_key_hook(v->win, ft_key, v);
 	mlx_hook(v->win, 6, (1L << 6), ft_motion, v);
 	mlx_mouse_hook(v->win, ft_mouse, v);

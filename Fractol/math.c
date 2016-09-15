@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/08 15:34:12 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/15 14:31:44 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,65 +41,13 @@ int				ft_hsv(double v, t_ftl *env, int i)
 		return (((int)v << 16) + ((int)hsv.l << 8) + (int)hsv.m);
 }
 
-/*void			ft_mandelbrot(t_var *v)
-{
-	ft_mandel_init(v);
-	while (v->ftl->a.y < v->win_h)
-	{
-		while (v->ftl->a.x < v->win_w)
-		{
-			v->ftl->c.r = v->ftl->a.x / v->ftl->zoomx + v->ftl->x1;
-			v->ftl->c.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
-			v->ftl->z.r = 0;
-			v->ftl->z.i = 0;
-			v->ftl->i = -1;
-			while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++v->ftl->i < v->ftl->imax)
-			{
-				v->ftl->tmp = v->ftl->z.r;
-				v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->ftl->c.r;
-				v->ftl->z.i = v->mandel * v->ftl->z.i * v->ftl->tmp + v->ftl->c.i;
-			}
-			ft_pixel_put(v, v->ftl->a.x, v->ftl->a.y, ft_hsv((int)v->ftl->i % 256, v->ftl, v->ftl->i));
-			v->ftl->a.x++;
-		}
-		v->ftl->a.x = 0;
-		v->ftl->a.y++;
-	}
-	free(v->ftl);
-}
-
-void			ft_julia(t_var *v)
-{
-	ft_julia_init(v);
-	while (v->ftl->a.y < v->win_h)
-	{
-		while (v->ftl->a.x < v->win_w)
-		{
-			v->ftl->z.r = v->ftl->a.x / v->ftl->zoomx + v->ftl->x1;
-			v->ftl->z.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
-			v->ftl->i = -1;
-			while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++v->ftl->i < v->ftl->imax)
-			{
-				v->ftl->tmp = v->ftl->z.r;
-				v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->c.r;
-				v->ftl->z.i = 2 * v->ftl->z.i * v->ftl->tmp + v->c.i;
-			}
-			ft_pixel_put(v, v->ftl->a.x, v->ftl->a.y, ft_hsv((int)v->ftl->i % 256, v->ftl, v->ftl->i));
-			v->ftl->a.x++;
-		}
-		v->ftl->a.x = 0;
-		v->ftl->a.y++;
-	}
-	free(v->ftl);
-}*/
-
-static int		ft_mandel(t_var *v)
+static int		ft_mandel(t_var *v, int x, int y)
 {
 	int			i;
 
 	ft_mandel_init(v);
-	v->ftl->c.r = v->ftl->a.x / v->ftl->zoomx + v->ftl->x1;
-	v->ftl->c.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
+	v->ftl->c.r = x / v->ftl->zoomx + v->ftl->x1;
+	v->ftl->c.i = y / v->ftl->zoomy + v->ftl->y1;
 	v->ftl->z.r = 0;
 	v->ftl->z.i = 0;
 	i = -1;
@@ -109,16 +57,16 @@ static int		ft_mandel(t_var *v)
 		v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->ftl->c.r;
 		v->ftl->z.i = 2 * v->ftl->z.i * v->ftl->tmp + v->ftl->c.i;
 	}
-	return(i);
+	return (i);
 }
 
-static int		ft_julia(t_var *v)
+static int		ft_julia(t_var *v, int x, int y)
 {
 	int			i;
 
 	ft_julia_init(v);
-	v->ftl->z.r = v->ftl->a.x / v->ftl->zoomx + v->ftl->x1;
-	v->ftl->z.i = v->ftl->a.y / v->ftl->zoomy + v->ftl->y1;
+	v->ftl->z.r = x / v->ftl->zoomx + v->ftl->x1;
+	v->ftl->z.i = y / v->ftl->zoomy + v->ftl->y1;
 	i = -1;
 	while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++i < v->ftl->imax)
 	{
@@ -126,29 +74,37 @@ static int		ft_julia(t_var *v)
 		v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->c.r;
 		v->ftl->z.i = 2 * v->ftl->z.i * v->ftl->tmp + v->c.i;
 	}
-	return(i);
+	return (i);
 }
 
 int				ft_draw_fractal(t_var *v)
 {
 	int color;
+	int x;
+	int y;
+	int	i;
 
-	v->ftl->a.y = 0;
-	while (v->ftl->a.y < v->win_h)
+	y = 0;
+	while (y < v->win_h)
 	{
-		v->ftl->a.x = 0;
-		while (v->ftl->a.x < v->win_w)
+		x = 0;
+		while (x < v->win_w)
 		{
 			if (v->type == 1 || v->type == 3)
-				color = ft_hsv(ft_mandel(v) % 256, v->ftl, ft_mandel(v));
-			if (v->type == 2)
-				color = ft_hsv(ft_julia(v) % 256, v->ftl, ft_julia(v));
-			ft_pixel_put(v, v->ftl->a.x, v->ftl->a.y, color);
-			v->ftl->a.x++;
+			{
+				i = ft_mandel(v, x, y);
+				color = ft_hsv(i % 256, v->ftl, i);
+			}
+			else if (v->type == 2)
+			{
+				i = ft_julia(v, x, y);
+				color = ft_hsv(i % 256, v->ftl, i);
+			}
+			ft_pixel_put(v, x, y, color);
+			x++;
 		}
-		v->ftl->a.y++;
+		y++;
 	}
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
-	free(v->ftl);
-	return(0);
+	return (0);
 }
