@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/15 15:03:59 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/19 14:43:43 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct		s_var
 	double			maxx;
 	double			miny;
 	double			maxy;
+	double			mx;
+	double			my;
 	t_complex		c;
 	t_ftl			*ftl;
 }					t_var;
@@ -88,5 +90,6 @@ void				ft_julia_init(t_var *v);
 int					ft_draw_fractal(t_var *v);
 int					ft_mouse(int button,int x, int y, t_var *v);
 int					ft_motion(int x, int y, t_var *v);
+int					ft_move(int keycode, t_var *v);
 
 #endif

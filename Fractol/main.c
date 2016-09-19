@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/15 15:06:30 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/19 13:13:26 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	ft_key(int keycode, t_var *v)
 		free(v);
 		exit(0);
 	}
+	ft_move(keycode, v);
 	return (0);
 }
 

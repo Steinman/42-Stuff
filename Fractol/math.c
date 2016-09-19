@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/15 14:31:44 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/19 15:20:48 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static int		ft_mandel(t_var *v, int x, int y)
 	int			i;
 
 	ft_mandel_init(v);
-	v->ftl->c.r = x / v->ftl->zoomx + v->ftl->x1;
-	v->ftl->c.i = y / v->ftl->zoomy + v->ftl->y1;
+	v->ftl->c.r = v->minx + ((double)x * (v->maxx - v->minx) / v->win_w);
+	v->ftl->c.i = v->miny + ((double)y * (v->maxy - v->miny) / v->win_h);
 	v->ftl->z.r = 0;
 	v->ftl->z.i = 0;
 	i = -1;
@@ -55,7 +55,7 @@ static int		ft_mandel(t_var *v, int x, int y)
 	{
 		v->ftl->tmp = v->ftl->z.r;
 		v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->ftl->c.r;
-		v->ftl->z.i = 2 * v->ftl->z.i * v->ftl->tmp + v->ftl->c.i;
+		v->ftl->z.i = v->mandel * v->ftl->z.i * v->ftl->tmp + v->ftl->c.i;
 	}
 	return (i);
 }
@@ -65,8 +65,8 @@ static int		ft_julia(t_var *v, int x, int y)
 	int			i;
 
 	ft_julia_init(v);
-	v->ftl->z.r = x / v->ftl->zoomx + v->ftl->x1;
-	v->ftl->z.i = y / v->ftl->zoomy + v->ftl->y1;
+	v->ftl->z.r = v->minx + ((double)x * (v->maxx - v->minx) / v->win_w);
+	v->ftl->z.i = v->miny + ((double)y * (v->maxy - v->miny) / v->win_h);
 	i = -1;
 	while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++i < v->ftl->imax)
 	{
