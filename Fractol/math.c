@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:05:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/19 15:20:48 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/20 14:30:08 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ static int		ft_mandel(t_var *v, int x, int y)
 	v->ftl->z.r = 0;
 	v->ftl->z.i = 0;
 	i = -1;
-	while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++i < v->ftl->imax)
+	while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4
+			&& ++i < v->ftl->imax)
 	{
 		v->ftl->tmp = v->ftl->z.r;
-		v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->ftl->c.r;
+		v->ftl->z.r = v->ftl->z.r * v->ftl->z.r -
+			v->ftl->z.i * v->ftl->z.i + v->ftl->c.r;
 		v->ftl->z.i = v->mandel * v->ftl->z.i * v->ftl->tmp + v->ftl->c.i;
 	}
 	return (i);
@@ -68,10 +70,12 @@ static int		ft_julia(t_var *v, int x, int y)
 	v->ftl->z.r = v->minx + ((double)x * (v->maxx - v->minx) / v->win_w);
 	v->ftl->z.i = v->miny + ((double)y * (v->maxy - v->miny) / v->win_h);
 	i = -1;
-	while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4 && ++i < v->ftl->imax)
+	while ((v->ftl->z.r * v->ftl->z.r + v->ftl->z.i * v->ftl->z.i) < 4
+			&& ++i < v->ftl->imax)
 	{
 		v->ftl->tmp = v->ftl->z.r;
-		v->ftl->z.r = v->ftl->z.r * v->ftl->z.r - v->ftl->z.i * v->ftl->z.i + v->c.r;
+		v->ftl->z.r = v->ftl->z.r * v->ftl->z.r -
+			v->ftl->z.i * v->ftl->z.i + v->c.r;
 		v->ftl->z.i = 2 * v->ftl->z.i * v->ftl->tmp + v->c.i;
 	}
 	return (i);
@@ -91,15 +95,10 @@ int				ft_draw_fractal(t_var *v)
 		while (x < v->win_w)
 		{
 			if (v->type == 1 || v->type == 3)
-			{
 				i = ft_mandel(v, x, y);
-				color = ft_hsv(i % 256, v->ftl, i);
-			}
 			else if (v->type == 2)
-			{
 				i = ft_julia(v, x, y);
-				color = ft_hsv(i % 256, v->ftl, i);
-			}
+			color = ft_hsv(i % 256, v->ftl, i);
 			ft_pixel_put(v, x, y, color);
 			x++;
 		}

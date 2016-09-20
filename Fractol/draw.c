@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:28:01 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/19 15:19:25 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/20 13:47:29 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,23 @@ int			ft_mouse(int button, int x, int y, t_var *v)
 	dy = v->maxy - v->miny;
 	v->mx = ((double)x / v->win_w * dx) - dx / 2 + v->mx;
 	v->my = ((double)y / v->win_h * dy) - dy / 2 + v->my;
-	if (x >= 0 && x <= v->win_w && y >= 0 && y <= v->win_h)
+	if ((button == 4 || button == 2) && x >= 0 &&
+			x <= v->win_w && y >= 0 && y <= v->win_h)
 	{
-		if (button == 4 || button == 2)
-		{
-			v->minx = v->mx - (dx * 1.1) / 2;
-			v->miny = v->my - (dy * 1.1) / 2;
-			v->maxx = v->mx + (dx * 1.1) / 2;
-			v->maxy = v->my + (dx * 1.1) / 2;
-		}
-		else if (button == 5 || button == 1)
-		{
-			v->minx = v->mx - (dx / 1.1) / 2;
-			v->miny = v->my - (dy / 1.1) / 2;
-			v->maxx = v->mx + (dx / 1.1) / 2;
-			v->maxy = v->my + (dy / 1.1) / 2;
-		}
-		ft_draw_fractal(v);
+		v->minx = v->mx - (dx * 1.1) / 2;
+		v->miny = v->my - (dy * 1.1) / 2;
+		v->maxx = v->mx + (dx * 1.1) / 2;
+		v->maxy = v->my + (dx * 1.1) / 2;
 	}
+	else if ((button == 5 || button == 1) && x >= 0 &&
+			x <= v->win_w && y >= 0 && y <= v->win_h)
+	{
+		v->minx = v->mx - (dx / 1.1) / 2;
+		v->miny = v->my - (dy / 1.1) / 2;
+		v->maxx = v->mx + (dx / 1.1) / 2;
+		v->maxy = v->my + (dy / 1.1) / 2;
+	}
+	ft_draw_fractal(v);
 	return (0);
 }
 

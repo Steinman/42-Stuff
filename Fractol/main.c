@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 15:09:33 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/19 13:13:26 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/20 13:59:52 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	ft_key(int keycode, t_var *v)
 {
-	printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_image(v->mlx, v->img);
@@ -31,7 +30,8 @@ static void	ft_check_param(int ac, char **av, t_var *v)
 	v->type = 0;
 	if (ac != 2)
 	{
-		ft_putstr("ERROR: only one parameter is allowed! try with mandelbrot, julia or mandelbar\n");
+		ft_putstr("ERROR: only one parameter is allowed! ");
+		ft_putendl("try with mandelbrot, julia or mandelbar");
 		free(v);
 		exit(0);
 	}
@@ -43,7 +43,8 @@ static void	ft_check_param(int ac, char **av, t_var *v)
 		v->type = 3;
 	if (v->type == 0)
 	{
-		ft_putstr("ERROR: invalid parameter! try with mandelbrot, julia or mandelbar\n");
+		ft_putstr("ERROR: invalid parameter! ");
+		ft_putendl("try with mandelbrot, julia or mandelbar");
 		free(v);
 		exit(0);
 	}
@@ -71,7 +72,6 @@ int			main(int ac, char **av)
 	v->win = mlx_new_window(v->mlx, v->win_w, v->win_h, "mlx_win");
 	v->img = mlx_new_image(v->mlx, v->win_w, v->win_h);
 	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
-	v->s = 0;
 	v->ftl = (t_ftl *)malloc(sizeof(t_ftl) * 1);
 	v->minx = -3.2;
 	v->miny = -3.2;

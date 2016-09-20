@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/19 14:43:43 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/20 14:15:15 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ typedef struct		s_ftl
 	float			x2;
 	float			y1;
 	float			y2;
-	double			zoomx;
-	double			zoomy;
-	double			i;
 	double			imax;
 	double			tmp;
 	t_complex		c;
@@ -72,7 +69,6 @@ typedef struct		s_var
 	int				type;
 	int				win_w;
 	int				win_h;
-	float			s;
 	double			minx;
 	double			maxx;
 	double			miny;
