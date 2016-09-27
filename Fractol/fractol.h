@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:41:00 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/20 14:15:15 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/27 14:21:13 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void				ft_pixel_put(t_var *v, int x, int y, int color);
 void				ft_mandel_init(t_var *v);
 void				ft_julia_init(t_var *v);
 int					ft_draw_fractal(t_var *v);
-int					ft_mouse(int button,int x, int y, t_var *v);
+int					ft_mouse(int button, int x, int y, t_var *v);
 int					ft_motion(int x, int y, t_var *v);
 int					ft_move(int keycode, t_var *v);
 
