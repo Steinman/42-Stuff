@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:29:10 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/29 13:52:58 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/09/29 16:26:04 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ typedef struct		s_var
 	int				endian;
 	int				win_w;
 	int				win_h;
+	int				err;
+	char			*buf;
+	char			**map;
 }					t_var;
+
+int					ft_open(t_var *v, char *file, int fd);
 
 #endif

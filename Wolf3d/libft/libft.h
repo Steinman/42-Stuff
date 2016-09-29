@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 14:58:38 by hcorrale          #+#    #+#             */
-/*   Updated: 2015/12/22 14:21:49 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/04/13 16:53:18 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
 
+# define BUFF_SIZE 1
 # define UC unsigned char
 
 typedef struct		s_list
@@ -47,6 +50,7 @@ char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
+int					ft_atoi_nb(const char *str, int *i);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
@@ -88,5 +92,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_swap(int *a, int *b);
 int					ft_isdigitchar(char c);
 int					ft_power(int nb, int p);
+int					ft_sqrt(int nb);
+int					get_next_line(int const fd, char **line);
 
 #endif

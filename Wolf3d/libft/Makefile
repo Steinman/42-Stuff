@@ -6,7 +6,7 @@
 #    By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 16:54:52 by hcorrale          #+#    #+#              #
-#    Updated: 2015/12/22 14:21:23 by hcorrale         ###   ########.fr        #
+#    Updated: 2016/04/13 16:52:56 by hcorrale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = ft_isascii.c \
 	  ft_tolower.c \
 	  ft_toupper.c \
 	  ft_atoi.c \
+	  ft_atoi_nb.c \
 	  ft_bzero.c \
 	  ft_memccpy.c \
 	  ft_memcpy.c \
@@ -76,6 +77,8 @@ SRC = ft_isascii.c \
 	  ft_swap.c \
 	  ft_isdigitchar.c \
 	  ft_power.c \
+	  ft_sqrt.c \
+	  get_next_line.c \
 
 OBJ = $(SRC:.c=.o)
 

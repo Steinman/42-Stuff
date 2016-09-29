@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_nb.c                                       :+:      :+:    :+:   */
+/*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/14 16:00:16 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 14:07:01 by hcorrale         ###   ########.fr       */
+/*   Created: 2016/09/29 15:23:15 by hcorrale          #+#    #+#             */
+/*   Updated: 2016/09/29 16:36:16 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi_nb(const char *str, int *i)
-{
-	int sign;
-	int nb;
+#include "wolf3d.h"
 
-	nb = 0;
-	sign = 1;
-	while (str[*i] >= 0 && str[*i] <= 32)
-		(*i)++;
-	if (str[*i] == '-')
-		sign = -1;
-	if (str[*i] == '+' || str[*i] == '-')
-		(*i)++;
-	while (str[*i] && str[*i] >= '0' && str[*i] <= '9')
+int			ft_open(t_var *v, char *file, int fd)
+{
+	char	*line;
+
+	if ((fd = open(file, O_RDONLY)) == -1)
 	{
-		nb = nb * 10 + (str[*i] - '0');
-		(*i)++;
+		v->err = 1;
+		return (0);
 	}
-	return (nb * sign);
+	v->buf = ft_strnew(1);
+	while ((v->err = get_next_line(fd, &line)) > 0)
+	{
+		v->buf = ft_strjoin(v->buf, line);
+		v->buf = ft_strjoin(v->buf, "\n");
+	}
+	if (v->err == -1)
+	{
+		v->err = 2;
+		return (0);
+	}
+	v->map = ft_strsplit(v->buf, '\n');
+	return (0);
 }

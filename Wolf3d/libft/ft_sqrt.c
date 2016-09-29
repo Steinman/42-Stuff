@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_nb.c                                       :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/14 16:00:16 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/05/26 14:07:01 by hcorrale         ###   ########.fr       */
+/*   Created: 2016/04/13 14:58:17 by hcorrale          #+#    #+#             */
+/*   Updated: 2016/05/26 14:07:20 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi_nb(const char *str, int *i)
-{
-	int sign;
-	int nb;
+#include "libft.h"
 
-	nb = 0;
-	sign = 1;
-	while (str[*i] >= 0 && str[*i] <= 32)
-		(*i)++;
-	if (str[*i] == '-')
-		sign = -1;
-	if (str[*i] == '+' || str[*i] == '-')
-		(*i)++;
-	while (str[*i] && str[*i] >= '0' && str[*i] <= '9')
-	{
-		nb = nb * 10 + (str[*i] - '0');
-		(*i)++;
-	}
-	return (nb * sign);
+int			ft_sqrt(int nb)
+{
+	int		i;
+
+	i = 1;
+	if (nb == 0)
+		return (0);
+	while (i * i < nb)
+		i++;
+	if ((nb % i) == 0)
+		return (i);
+	else
+		return (0);
 }

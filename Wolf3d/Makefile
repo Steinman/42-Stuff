@@ -6,7 +6,7 @@
 #    By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 16:54:52 by hcorrale          #+#    #+#              #
-#    Updated: 2016/09/29 13:47:51 by hcorrale         ###   ########.fr        #
+#    Updated: 2016/09/29 16:00:53 by hcorrale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ HEAD = wolf3d.h
 
 SRC =	main.c \
 		tools.c \
+		open.c \
 
 OBJ = $(patsubst %.c,%.o,$(addprefix $(PATH_SRC), $(SRC)))
 
