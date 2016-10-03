@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/09/29 16:38:11 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/03 12:50:10 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,35 @@
 	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
 }*/
 
+static int		ft_error(int err)
+{
+	if (err == 1)
+	{
+		ft_putendl("ERROR: Invalid parameter");
+		return (1);
+	}
+	else if (err == 2)
+	{
+		ft_putendl("ERROR: Invalid file");
+		return (1);
+	}
+	else if (err == 3)
+	{
+		ft_putendl("ERROR: Invalid map file");
+		return (1);
+	}
+	else if (err == 4)
+	{
+		ft_putendl("ERROR: Invalid character in map file");
+		return(1);
+	}
+	return (0);
+}
+
 int				main(int ac, char **av)
 {
 	t_var	*v;
+	int		exit;
 
 	if (ac != 2 || !av[1])
 	{
@@ -34,6 +60,8 @@ int				main(int ac, char **av)
 	v->win_h = 800;
 	//ft_mlx_init(v);
 	ft_open(v, av[1], 0);
+	if ((exit = ft_error(v->err)) == 1)
+		return (0);
 	ft_putstr(v->map[2]);
 	return (0);
 }
