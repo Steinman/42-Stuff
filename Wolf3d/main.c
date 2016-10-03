@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/03 12:50:10 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/03 13:54:37 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ int				main(int ac, char **av)
 	ft_open(v, av[1], 0);
 	if ((exit = ft_error(v->err)) == 1)
 		return (0);
-	ft_putstr(v->map[2]);
+	ft_putendl(v->map[0]);
+	ft_putendl(v->map[1]);
+	ft_putendl(v->map[2]);
+	ft_putendl(v->map[3]);
+	ft_putendl(v->map[4]);
+	ft_putendl(v->map[5]);
 	return (0);
 }
