@@ -6,19 +6,19 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/06 15:46:05 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/07 12:28:43 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-/*static void		ft_mlx_init(t_var *v)
+static void		ft_mlx_init(t_var *v)
 {
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->win_w, v->win_h, "Wolf3D");
 	v->img = mlx_new_image(v->mlx, v->win_w, v->win_h);
 	v->add = mlx_get_data_addr(v->img, &v->bpp, &v->line, &v->endian);
-i}*/
+}
 
 static int		ft_error(int err)
 {
@@ -58,10 +58,13 @@ int				main(int ac, char **av)
 	v = (t_var *)malloc(sizeof(t_var) * 1);
 	v->win_w = 800;
 	v->win_h = 800;
-	//ft_mlx_init(v);
-	ft_open(v, av[1], 0);
-	if ((exit = ft_error(v->err)) == 1)
-		return (0);
-	ft_putendl(v->buf);
+	if (ft_open(v, av[1], 0) == 1)
+	{
+		if ((exit = ft_error(v->err)) == 1)
+			return (0);
+	}
+	ft_mlx_init(v);
+	mlx_key_hook(v->win, ft_key_hook, v);
+	mlx_loop(v->mlx);
 	return (0);
 }
