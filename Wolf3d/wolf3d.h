@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:29:10 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/07 12:29:30 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/10 14:15:43 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,18 @@ typedef struct		s_var
 	char			*add;
 	int				bpp;
 	int				line;
+	int				line_nb;
 	int				endian;
 	int				win_w;
 	int				win_h;
 	int				err;
+	double			posx;
+	double			posy;
 	char			**map;
 }					t_var;
 
 int					ft_open(t_var *v, char *file, int fd);
 int					ft_key_hook(int keycode, t_var *v);
+void				ft_find_player(t_var *v);
 
 #endif
