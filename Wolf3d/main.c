@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/10 14:14:26 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/11 13:41:31 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ int				main(int ac, char **av)
 			return (0);
 	}
 	ft_mlx_init(v);
+	ft_find_player(v);
+	printf("posx = %f\n", v->posx);
+	printf("posy = %f\n", v->posy);
+	ft_putendl("player found");
+	ft_raycast(v);
+	ft_putendl("raycasted");
 	mlx_key_hook(v->win, ft_key_hook, v);
 	mlx_loop(v->mlx);
 	return (0);

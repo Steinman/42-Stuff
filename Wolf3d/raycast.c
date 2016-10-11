@@ -6,23 +6,21 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 14:13:42 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/10 15:22:46 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/11 13:39:16 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int			ft_raycast(t_var *v)
+void		ft_raycast(t_var *v)
 {
 	double	dirx;
 	double	diry;
 	double	planex;
 	double	planey;
-	double	time;
-	double	oldtime;
 	double	camx;
-	double	rayx;
-	double	rayy;
+	double	rayposx;
+	double	rayposy;
 	double	raydirx;
 	double	raydiry;
 	double	sidedistx;
@@ -30,8 +28,9 @@ int			ft_raycast(t_var *v)
 	double	deltadistx;
 	double	deltadisty;
 	double	perpwalldist;
+	double	dh;
 	int		mapx;
-	int		may;
+	int		mapy;
 	int		stepx;
 	int		stepy;
 	int		hit;
@@ -41,50 +40,50 @@ int			ft_raycast(t_var *v)
 	int		drawend;
 	int		color;
 	int		x;
+	int		y;
 
-	posx = 22;
-	posy = 12;
 	dirx = -1;
 	diry = 0;
 	planex = 0;
 	planey = 0.66;
-	time = 0;
-	oldtime = 0;
+	dh = 2.0;
 	x = 0;
-	hit = 0;
-	color = 0x0000FF;
 	while (x < v->win_w)
 	{
-		camx = 2 * x / double(v->win_w) - 1;
+		camx = 2 * x / (double)v->win_w - 1;
+		side = 0;
+		hit = 0;
 		rayposx = v->posx;
 		rayposy = v->posy;
 		raydirx = dirx + planex * camx;
 		raydiry = diry + planey * camx;
-		mapx = int(rayposx);
-		mapy = int(rayposy);
-		deltadistx = sqrt(1 + (raydiry * raydiry) / (raydirx * raydirx));
-		deltadisty = sqrt(1 + (raydirx * raydirx) / (raydiry * raydiry));
+		mapx = (int)rayposx;
+		mapy = (int)rayposy;
+		deltadistx = sqrt(1 + pow(raydiry / raydirx, 2));
+		deltadisty = sqrt(1 + pow(raydirx / raydiry, 2));
+		ft_putendl("initialized");
 		if (raydirx < 0)
 		{
 			stepx = -1;
-			sidedistx = (rayposx - mapx) * deltadistx;
+			sidedistx = (rayposx - (double)mapx) * deltadistx;
 		}
 		else
 		{
 			stepx = 1;
-			sidedistx = (mapx + 1.0 - rayposx) * deltadistx;
+			sidedistx = ((double)mapx + 1.0 - rayposx) * deltadistx;
 		}
 		if (raydiry < 0)
 		{
 			stepy = -1;
-			sidedisty = (rayposy - mapy) * deltadisty;
+			sidedisty = (rayposy - (double)mapy) * deltadisty;
 		}
 		else
 		{
 			stepy = 1;
-			sidedisty = (mapy + 1.0 - rayposy) * deltadisty;
+			sidedisty = ((double)mapy + 1.0 - rayposy) * deltadisty;
 		}
-		while (hit == 0)
+		ft_putendl("step done");
+		while (hit != 1)
 		{
 			if (sidedistx < sidedisty)
 			{
@@ -101,18 +100,38 @@ int			ft_raycast(t_var *v)
 			if (v->map[mapx][mapy] == '1')
 				hit = 1;
 		}
+		ft_putendl("hit done");
 		if (side == 0)
-			perpwalldist = (mapx - rayposx + (1 - stepx) / 2) / raydirx;
+			perpwalldist = fabs((mapx - rayposx + (1 - stepx) / 2) / raydirx);
 		else
-			perpwalldist = (mapy - rayposy + (1 - stepy) / 2) / raydiry;
-		lineheight = int(v->win_h / perpwalldist);
-		drawstart = -lineheight / 2 + v->win_h / 2;
-		if (drawstart < 0)
+			perpwalldist = fabs((mapy - rayposy + (1 - stepy) / 2) / raydiry);
+		if (perpwalldist <= 0.05)
+			perpwalldist = 0.05;
+		lineheight = fabs(v->win_h / perpwalldist);
+		if ((drawstart = -(lineheight) / dh + v->win_h / 2) < 0)
 			drawstart = 0;
-		drawend = lineheight / 2 + v->win_h / 2;
-		if (drawend >= v->win_h)
+		if ((drawend = lineheight / 2 + v->win_h / 2) >= v->win_h)
 			drawend = v->win_h - 1;
-		if (side == 1)
-			color = color / 2;
+		ft_putendl("draw init done");
+		y = 0;
+		while (y < v->win_h)
+		{
+			if (y < drawstart)
+				color = 0x5AD4EC;
+			else if (y > drawend)
+				color = 0x000000;
+			else
+			{
+				if (hit == 1)
+					color = 0x00B2F2;
+			}
+			ft_pixel_put(v, x, y, color);
+			y++;
+			ft_putendl("colum readed");
+		}
+		x++;
+		ft_putendl("line readed");
 	}
+	ft_putendl("loop finished");
+	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
 }
