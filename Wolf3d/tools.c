@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:37:11 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/10 13:37:34 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/14 14:14:15 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_pixel_put(t_var *v, int x, int y, int color)
 	}
 }
 
-void		ft_find_player(t_var *v)
+void		ft_find_player(t_var *v, t_w3d *w)
 {
 	char	**map;
 	int		j;
@@ -42,11 +42,24 @@ void		ft_find_player(t_var *v)
 		{
 			if (map[j][i] == 'X')
 			{
-				v->posx = i;
-				v->posy = j;
+				w->posx = i;
+				w->posy = j;
 			}
 			i++;
 		}
 		j++;
 	}
+}
+
+int			ft_linelen(char *str, int i)
+{
+	int		len;
+
+	len = 0;
+	while(str[i] != '\n' && str[i] != '\0')
+	{
+		i++;
+		len++;
+	}
+	return (len);
 }

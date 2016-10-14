@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/11 13:41:31 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/14 13:14:19 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int		ft_error(int err)
 int				main(int ac, char **av)
 {
 	t_var	*v;
+	t_w3d	*w;
 	int		exit;
 
 	if (ac != 2 || !av[1])
@@ -63,12 +64,14 @@ int				main(int ac, char **av)
 		if ((exit = ft_error(v->err)) == 1)
 			return (0);
 	}
+	printf("line = %zu\n", ft_strlen(v->map[0]));
+	w = (t_w3d *)malloc(sizeof(t_w3d) * 1);
 	ft_mlx_init(v);
-	ft_find_player(v);
-	printf("posx = %f\n", v->posx);
-	printf("posy = %f\n", v->posy);
+	ft_find_player(v, w);
+	printf("posx = %f\n", w->posx);
+	printf("posy = %f\n", w->posy);
 	ft_putendl("player found");
-	ft_raycast(v);
+	ft_raycast(v, w);
 	ft_putendl("raycasted");
 	mlx_key_hook(v->win, ft_key_hook, v);
 	mlx_loop(v->mlx);
