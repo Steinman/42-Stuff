@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/14 13:14:19 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/17 14:41:57 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int				main(int ac, char **av)
 	printf("posx = %f\n", w->posx);
 	printf("posy = %f\n", w->posy);
 	ft_putendl("player found");
-	ft_raycast(v, w);
+	ft_draw(v, w);
 	ft_putendl("raycasted");
 	mlx_key_hook(v->win, ft_key_hook, v);
 	mlx_loop(v->mlx);

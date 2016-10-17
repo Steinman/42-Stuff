@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:29:10 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/14 14:15:05 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/17 14:42:07 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ typedef struct		s_w3d
 int					ft_open(t_var *v, char *file, int fd);
 int					ft_key_hook(int keycode, t_var *v);
 int					ft_linelen(char *str, int i);
-void				ft_find_player(t_var *v, t_w3d *w);
+int					ft_find_player(t_var *v, t_w3d *w);
 void				ft_raycast(t_var *v, t_w3d *w);
 void				ft_pixel_put(t_var *v, int x, int y, int color);
+void				ft_draw(t_var *v, t_w3d *w);
 
 #endif
