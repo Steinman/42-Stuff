@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:37:11 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/17 12:12:02 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/18 12:06:39 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_pixel_put(t_var *v, int x, int y, int color)
 	}
 }
 
-int			ft_find_player(t_var *v, t_w3d *w)
+int			ft_find_player(t_var *v)
 {
 	int		j;
 	int		i;
@@ -40,12 +40,13 @@ int			ft_find_player(t_var *v, t_w3d *w)
 		{
 			if (v->map[j][i] == 'X')
 			{
-				w->posx = i;
-				w->posy = j;
-				w->dirx = -1;
-				w->diry = 0;
-				w->planex = 0;
-				w->planey = 0.6;
+				v->w->posx = i;
+				v->w->posy = j;
+				v->w->dirx = -1;
+				v->w->diry = 0;
+				v->w->planex = 0;
+				v->w->planey = 0.6;
+				v->w->spd = 0.2;
 				return (0);
 			}
 			i++;
