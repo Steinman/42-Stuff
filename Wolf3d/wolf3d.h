@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:29:10 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/18 11:46:06 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/18 14:08:11 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_w3d
 	double			deltadisty;
 	double			perpwalldist;
 	double			spd;
+	double			rtspd;
 	int				mapx;
 	int				mapy;
 	int				stepx;

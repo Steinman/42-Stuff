@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:37:11 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/18 12:06:39 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/18 13:40:43 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int			ft_find_player(t_var *v)
 				v->w->planex = 0;
 				v->w->planey = 0.6;
 				v->w->spd = 0.2;
+				v->w->rtspd = 0.05;
 				return (0);
 			}
 			i++;

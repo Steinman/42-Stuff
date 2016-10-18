@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/18 12:02:27 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/18 14:04:35 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int				main(int ac, char **av)
 	v->w = (t_w3d *)malloc(sizeof(t_w3d) * 1);
 	ft_find_player(v);
 	mlx_expose_hook(v->win, ft_draw, v);
-	mlx_key_hook(v->win, ft_key_hook, v);
+	mlx_hook(v->win, 2, 1L << 0, ft_key_hook, v);
+	//mlx_key_hook(v->win, ft_key_hook, v);
 	mlx_loop(v->mlx);
 	return (0);
 }

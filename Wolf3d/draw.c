@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:23:43 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/18 12:00:11 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/18 13:54:02 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int			ft_draw(t_var *v)
 	int		x;
 
 	x = 0;
-	ft_putendl("started expose");
 	while (x < v->win_w)
 	{
 		ft_ray_init(v, x);
