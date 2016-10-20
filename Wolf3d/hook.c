@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:18:04 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/18 13:53:40 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:31:00 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@ static void	ft_move(t_var *v, int keycode)
 {
 	if (keycode == 126)
 	{
-		v->w->posx += v->w->dirx * v->w->spd;
-		v->w->posy += v->w->diry * v->w->spd;
+		if (v->map[(int)v->w->posy][(int)(v->w->posx + v->w->dirx * v->w->spd)] != '1')
+			v->w->posx += v->w->dirx * v->w->spd;
+		if (v->map[(int)(v->w->posy + v->w->diry * v->w->spd)][(int)v->w->posx] != '1')
+			v->w->posy += v->w->diry * v->w->spd;
 	}
 	if (keycode == 125)
 	{
-		v->w->posx -= v->w->dirx * v->w->spd;
-		v->w->posy -= v->w->diry * v->w->spd;
+		if (v->map[(int)v->w->posy][(int)(v->w->posx - v->w->dirx * v->w->spd)] != '1')
+			v->w->posx -= v->w->dirx * v->w->spd;
+		if (v->map[(int)(v->w->posy - v->w->diry * v->w->spd)][(int)v->w->posx] != '1')
+			v->w->posy -= v->w->diry * v->w->spd;
 	}
 }
 

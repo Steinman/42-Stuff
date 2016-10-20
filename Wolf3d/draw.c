@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:23:43 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/18 13:54:02 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:32:55 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ static void	ft_ray_init(t_var *v, int x)
 	v->w->deltadisty = sqrt(1 + pow(v->w->raydirx / v->w->raydiry, 2));
 }
 
+static int	ft_wall_color(t_var *v)
+{
+	int		color;
+
+	if (v->w->side == 0 && v->w->diry < 0)
+		color = 0xdc143c;
+	else if (v->w->side == 0 && v->w->diry >= 0)
+		color = 0x1e90ff;
+	else
+		color = 0x228b22;
+	return (color);
+}
+
 static void	ft_colors(t_var *v, int x)
 {
 	int		y;
@@ -37,11 +50,11 @@ static void	ft_colors(t_var *v, int x)
 		if (y < v->w->drawstart)
 			v->w->color = 0x5AD4EC;
 		else if (y > v->w->drawend)
-			v->w->color = 0x000000;
+			v->w->color = 0x696969;
 		else
 		{
 			if (v->w->hit == 1)
-				v->w->color = 0x00B2F2;
+				v->w->color = ft_wall_color(v);
 		}
 		ft_pixel_put(v, x, y, v->w->color);
 		y++;
