@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:37:11 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/18 13:40:43 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/25 13:07:41 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_pixel_put(t_var *v, int x, int y, int color)
 	int		i;
 	char	*rgb;
 
-	if (x > 0 && x<= v->win_w && y > 0 && y <= v->win_h)
+	if (x > 0 && x <= v->win_w && y > 0 && y <= v->win_h)
 	{
 		i = x * (v->bpp / 8) + (y * v->line);
 		rgb = (char *)&color;
@@ -27,12 +27,8 @@ void		ft_pixel_put(t_var *v, int x, int y, int color)
 	}
 }
 
-int			ft_find_player(t_var *v)
+int			ft_find_player(t_var *v, int i, int j)
 {
-	int		j;
-	int		i;
-
-	j = 0;
 	while (j < v->line_nb)
 	{
 		i = 0;
@@ -62,7 +58,7 @@ int			ft_linelen(char *str, int i)
 	int		len;
 
 	len = 0;
-	while(str[i] != '\n' && str[i] != '\0')
+	while (str[i] != '\n' && str[i] != '\0')
 	{
 		i++;
 		len++;

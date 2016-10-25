@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:23:15 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/14 14:02:28 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/25 13:11:06 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_char_error(char *buf)
 		if (buf[i] != '0' && buf[i] != '1' && buf[i] != 'X' && buf[i] != '\n')
 			return (1);
 		if (buf[i] == '\n' && (buf[i + 1] == '\n' || buf[i + 1] == '\0'))
-			return(1);
+			return (1);
 		i++;
 	}
 	return (0);
@@ -47,7 +47,6 @@ static int	ft_line_error(t_var *v, size_t len, int line)
 	}
 	return (0);
 }
-
 
 static int	ft_file_error(int line, char *buf, t_var *v)
 {
@@ -74,7 +73,6 @@ int			ft_open(t_var *v, char *file, int fd)
 	char	*line;
 	char	*buf;
 
-	v->line_nb = 0;
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{
 		v->err = 1;

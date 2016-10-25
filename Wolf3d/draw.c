@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:23:43 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/20 16:32:55 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:05:11 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ static int	ft_wall_color(t_var *v)
 {
 	int		color;
 
-	if (v->w->side == 0 && v->w->diry < 0)
+	if (v->w->side == 0 && v->w->stepx >= 0)
 		color = 0xdc143c;
-	else if (v->w->side == 0 && v->w->diry >= 0)
+	else if (v->w->side == 0 && v->w->stepx < 0)
 		color = 0x1e90ff;
-	else
+	else if (v->w->side == 1 && v->w->stepy >= 0)
 		color = 0x228b22;
+	else
+		color = 0xf0c619;
 	return (color);
 }
 

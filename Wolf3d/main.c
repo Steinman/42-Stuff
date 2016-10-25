@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/20 12:37:52 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/10/25 13:11:10 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		ft_error(int err)
 	else if (err == 4)
 	{
 		ft_putendl("ERROR: Invalid character in map file");
-		return(1);
+		return (1);
 	}
 	return (0);
 }
@@ -58,6 +58,7 @@ int				main(int ac, char **av)
 	v = (t_var *)malloc(sizeof(t_var) * 1);
 	v->win_w = 800;
 	v->win_h = 800;
+	v->line_nb = 0;
 	if (ft_open(v, av[1], 0) == 1)
 	{
 		if ((exit = ft_error(v->err)) == 1)
@@ -65,7 +66,7 @@ int				main(int ac, char **av)
 	}
 	ft_mlx_init(v);
 	v->w = (t_w3d *)malloc(sizeof(t_w3d) * 1);
-	ft_find_player(v);
+	ft_find_player(v, 0, 0);
 	mlx_expose_hook(v->win, ft_draw, v);
 	mlx_hook(v->win, 2, 1L << 0, ft_key_hook, v);
 	mlx_loop(v->mlx);
