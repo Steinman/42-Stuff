@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:18:04 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/25 12:59:47 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/11/02 13:08:15 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,20 @@ static void	ft_rotate(int keycode, t_var *v, double tmpdir, double tmpplane)
 
 int			ft_key_hook(int keycode, t_var *v)
 {
+	int		i;
+
+	i = 0;
 	if (keycode == 53)
 	{
 		mlx_destroy_image(v->mlx, v->img);
 		mlx_destroy_window(v->mlx, v->win);
+		free(v->w);
+		while (i < v->line_nb)
+		{
+			free(v->map[i]);
+			i++;
+		}
+		free(v->map);
 		free(v);
 		exit(0);
 	}

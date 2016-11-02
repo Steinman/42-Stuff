@@ -6,7 +6,7 @@
 #    By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 16:54:52 by hcorrale          #+#    #+#              #
-#    Updated: 2016/04/13 16:52:56 by hcorrale         ###   ########.fr        #
+#    Updated: 2016/11/02 13:29:24 by hcorrale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC = ft_isascii.c \
 	  ft_strmapi.c \
 	  ft_strsub.c \
 	  ft_strjoin.c \
+	  ft_strjoin2.c \
 	  ft_strtrim.c \
 	  ft_itoa.c \
 	  ft_strsplit.c \

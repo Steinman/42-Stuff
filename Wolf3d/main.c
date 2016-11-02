@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:55:23 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/25 13:11:10 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/11/02 16:30:30 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int				main(int ac, char **av)
 {
 	t_var	*v;
 	int		exit;
+	int		j;
 
+	j = 0;
 	if (ac != 2 || !av[1])
 	{
 		ft_putendl("ERROR: only one parameter allowed");
@@ -66,7 +68,12 @@ int				main(int ac, char **av)
 	}
 	ft_mlx_init(v);
 	v->w = (t_w3d *)malloc(sizeof(t_w3d) * 1);
-	ft_find_player(v, 0, 0);
+	if (ft_find_player(v, 0, 0) == -1)
+	{
+		ft_putendl("ERROR: Missing player spawnpoint in map file");
+		return (0);
+	}
+	ft_map_check(v);
 	mlx_expose_hook(v->win, ft_draw, v);
 	mlx_hook(v->win, 2, 1L << 0, ft_key_hook, v);
 	mlx_loop(v->mlx);

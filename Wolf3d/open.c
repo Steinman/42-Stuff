@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:23:15 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/10/25 13:11:06 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/11/02 14:00:09 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	ft_file_error(int line, char *buf, t_var *v)
 		free(buf);
 		return (1);
 	}
-	free(buf);
 	len = ft_strlen(v->map[0]);
 	if (ft_line_error(v, len, line) == 1)
 	{
@@ -81,11 +80,10 @@ int			ft_open(t_var *v, char *file, int fd)
 	buf = ft_strnew(1);
 	while ((v->err = get_next_line(fd, &line)) > 0)
 	{
-		buf = ft_strjoin(buf, line);
-		buf = ft_strjoin(buf, "\n");
+		buf = ft_strjoin2(ft_strjoin2(buf, line), "\n");
+		free(line);
 		v->line_nb++;
 	}
-	free(line);
 	if (v->err == -1)
 	{
 		v->err = 2;
@@ -94,5 +92,6 @@ int			ft_open(t_var *v, char *file, int fd)
 	v->map = ft_strsplit(buf, '\n');
 	if (ft_file_error(v->line_nb, buf, v) == 1)
 		return (1);
+	free(buf);
 	return (0);
 }
