@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:37:11 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/11/02 16:31:23 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/11/03 11:53:47 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,10 @@ int			ft_find_player(t_var *v, int i, int j)
 	return (-1);
 }
 
-int			ft_map_check(t_var *v)
+int			ft_map_check(t_var *v, int i, int j)
 {
-	int		j;
-	int		i;
-	int 	len;
+	int		len;
 
-	j = 0;
 	len = ft_strlen(v->map[0]);
 	while (j < v->line_nb)
 	{

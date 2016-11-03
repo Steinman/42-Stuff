@@ -6,7 +6,7 @@
 /*   By: hcorrale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:29:10 by hcorrale          #+#    #+#             */
-/*   Updated: 2016/11/02 15:25:02 by hcorrale         ###   ########.fr       */
+/*   Updated: 2016/11/03 11:53:33 by hcorrale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ int					ft_find_player(t_var *v, int i, int j);
 void				ft_raycast(t_var *v);
 void				ft_pixel_put(t_var *v, int x, int y, int color);
 int					ft_draw(t_var *v);
-int					ft_map_check(t_var *v);
+int					ft_map_check(t_var *v, int i, int j);
 
 #endif
